@@ -32,26 +32,32 @@ def index():
         if len(resposta.data) > 0:
             print(resposta)
             session['id_usuario'] = resposta.data[0]['id']
-            return redirect(url_for('tarefas'))
+            return redirect(url_for('dashboard'))
         else:
             print('Usuário não cadastrado')
     return render_template('index.html')
 
-@app.route('/tarefas')
-def tarefas():
-
+@app.route('/dashboard')
+def dashboard():
     if 'id_usuario' not in session:
         print('Usuário não logado')
         return redirect(url_for('index'))
     
-    id = session['id_usuario']
-    resposta = supabase.table('tarefas').select('*').eq('usuario_id',id).execute()
-    
-    return render_template('tarefas.html',tarefas = resposta.data)
+    return render_template('dashboard.html')
+
+
 
 @app.route('/cadastro')
 def cadastro():
     return render_template('cadastro.html')
+
+
+
+@app.route('/sair')
+def sair():
+    session.clear()
+    return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
