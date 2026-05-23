@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="text-center">Sistema de tarefas</h1>
+
+<div>
+    <form action="/" method="POST">
+        <div>
+            <label for="email">E-mail:</label>
+            <input type="text" id="email" name="email">
+        </div>
+        <div>
+            <label for="email">Senha:</label>
+            <input type="password" id="senha" name="senha">
+        </div>
+        <div>
+            <button type="submit">Enviar</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
