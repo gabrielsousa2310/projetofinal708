@@ -2,7 +2,7 @@
 # venv/scripts/activate - ativa o ambiente virtual
 # pip install -r requirements.txt - instala as dependências do projeto
 # pip freeze > requirements.txt - salva as dependências do projeto no arquivo requirements.txt
-
+// ola
 from flask import *
 from dotenv import load_dotenv
 import os
