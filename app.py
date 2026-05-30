@@ -2,11 +2,10 @@
 # venv/scripts/activate - ativa o ambiente virtual
 # pip install -r requirements.txt - instala as dependências do projeto
 # pip freeze > requirements.txt - salva as dependências do projeto no arquivo requirements.txt
-// ola
+# ola
 from flask import *
 from dotenv import load_dotenv
 import os
-
 from supabase import create_client
 
 # senha da sessão
@@ -45,11 +44,30 @@ def dashboard():
     
     return render_template('dashboard.html')
 
+@app.route('/cadastro_clientes',methods=['GET','POST'])
+def cadastro_clientes():
+    if request.method == 'POST':
+        nome = request.form.get('nome')
+        telefone = request.form.get('telefone')
+        email = request.form.get('email')
+        cpf = request.form.get('cpf')
+        endereco = request.form.get('endereco')
+        observacoes = request.form.get('observacoes')
 
+        dados = {
+            'nome': nome,
+            'telefone': telefone,
+            'email': email,
+            'cpf': cpf,
+            'endereco': endereco,
+            'observacoes': observacoes
+        }
+        supabase.table('clientes').insert(dados).execute()
 
-@app.route('/cadastro')
-def cadastro():
-    return render_template('cadastro.html')
+        return redirect(url_for('dashboard'))
+
+    return render_template('cadastro_clientes.html')
+
 
 
 
