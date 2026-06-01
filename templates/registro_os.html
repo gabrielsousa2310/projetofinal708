@@ -1,0 +1,320 @@
+{% extends "baselogado.html" %}
+{% block content %}
+
+
+<div class="container py-5">
+    <!--mensagem de sucesso-->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+
+            <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+
+                <i class="bi bi-check-circle-fill me-2"></i>
+
+                {{ message }}
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert">
+                </button>
+
+            </div>
+
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+    <div class="mb-5">
+
+        <h1 class="fw-bold">
+            Registro de Ordem de Serviço
+        </h1>
+
+        <p class="text-muted mb-0">
+            Preencha as informações da ordem de serviço.
+        </p>
+
+    </div>
+
+    <div class="card border-0 shadow-lg rounded-4">
+
+        <div class="card-body p-4 p-md-5">
+
+            <form method="POST">
+
+                <!-- CLIENTE E VEÍCULO -->
+                <div class="mb-5">
+
+                    <div class="d-flex align-items-center mb-4">
+
+                        <div class="bg-primary rounded-3 p-2 text-white me-3">
+                            <i class="bi bi-car-front-fill"></i>
+                        </div>
+
+                        <div>
+
+                            <h4 class="fw-bold mb-0">
+                                Cliente e Veículo
+                            </h4>
+
+                            <small class="text-muted">
+                                Dados do cliente e do veículo
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row g-4">
+
+                        <div class="col-md-6">
+
+                            <label class="form-label fw-semibold">
+                                Cliente
+                            </label>
+
+                            <input
+                                type="text"
+                                name="cliente"
+                                class="form-control form-control-lg rounded-3"
+                                placeholder="Nome do cliente"
+                                required>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="form-label fw-semibold">
+                                Veículo
+                            </label>
+
+                            <input
+                                type="text"
+                                name="veiculo"
+                                class="form-control form-control-lg rounded-3"
+                                placeholder="Ex: Gol 1.0 2020">
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="form-label fw-semibold">
+                                Placa
+                            </label>
+
+                            <input
+                                type="text"
+                                name="placa"
+                                class="form-control form-control-lg rounded-3"
+                                placeholder="ABC1D23">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- RESPONSÁVEL -->
+                <div class="mb-5">
+
+                    <div class="d-flex align-items-center mb-4">
+
+                        <div class="bg-success rounded-3 p-2 text-white me-3">
+                            <i class="bi bi-person-badge-fill"></i>
+                        </div>
+
+                        <div>
+
+                            <h4 class="fw-bold mb-0">
+                                Responsável
+                            </h4>
+
+                            <small class="text-muted">
+                                Funcionário responsável pelo serviço
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <label class="form-label fw-semibold">
+                                Funcionário
+                            </label>
+
+                            <input
+                                type="text"
+                                name="funcionario"
+                                class="form-control form-control-lg rounded-3"
+                                placeholder="Nome do funcionário">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- SERVIÇO -->
+                <div class="mb-5">
+
+                    <div class="d-flex align-items-center mb-4">
+
+                        <div class="bg-warning rounded-3 p-2 text-white me-3">
+                            <i class="bi bi-tools"></i>
+                        </div>
+
+                        <div>
+
+                            <h4 class="fw-bold mb-0">
+                                Serviço
+                            </h4>
+
+                            <small class="text-muted">
+                                Informações da manutenção
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row g-4">
+
+                        <div class="col-12">
+
+                            <label class="form-label fw-semibold">
+                                Problema relatado
+                            </label>
+
+                            <textarea
+                                name="problema_relatado"
+                                class="form-control rounded-3"
+                                rows="4"
+                                placeholder="Descreva o problema informado pelo cliente"></textarea>
+
+                        </div>
+
+                        <div class="col-12">
+
+                            <label class="form-label fw-semibold">
+                                Serviço realizado
+                            </label>
+
+                            <textarea
+                                name="servico_realizado"
+                                class="form-control rounded-3"
+                                rows="4"
+                                placeholder="Descreva o serviço executado"></textarea>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <label class="form-label fw-semibold">
+                                Valor (R$)
+                            </label>
+
+                            <input
+                                type="number"
+                                step="0.01"
+                                name="valor"
+                                class="form-control form-control-lg rounded-3"
+                                placeholder="0,00">
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <label class="form-label fw-semibold">
+                                Status
+                            </label>
+
+                            <select
+                                name="status"
+                                class="form-select form-select-lg rounded-3"
+                                required>
+
+                                <option value="">Selecione</option>
+                                <option value="Aberta">Aberta</option>
+                                <option value="Em andamento">Em andamento</option>
+                                <option value="Aguardando peça">Aguardando peça</option>
+                                <option value="Concluída">Concluída</option>
+                                <option value="Entregue">Entregue</option>
+                                <option value="Cancelada">Cancelada</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- OBSERVAÇÕES -->
+                <div class="mb-5">
+
+                    <div class="d-flex align-items-center mb-4">
+
+                        <div class="bg-dark rounded-3 p-2 text-white me-3">
+                            <i class="bi bi-chat-left-text-fill"></i>
+                        </div>
+
+                        <div>
+
+                            <h4 class="fw-bold mb-0">
+                                Observações 
+                            </h4>
+
+                            <small class="text-muted">
+                                Informações adicionais
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <textarea
+                        name="observacoes"
+                        class="form-control rounded-3"
+                        rows="5"
+                        placeholder="Digite observações adicionais"></textarea>
+
+                </div>
+
+                <!-- BOTÕES -->
+                <div class="d-flex justify-content-end gap-3 flex-wrap">
+
+                    <a href="{{ url_for('dashboard') }}"
+                       class="btn btn-outline-secondary px-4 py-2 rounded-3">
+
+                        Voltar
+
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary px-5 py-2 rounded-3 shadow-sm">
+
+                        <i class="bi bi-check-circle-fill me-2"></i>
+
+                        Registrar OS
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+{% endblock %}
