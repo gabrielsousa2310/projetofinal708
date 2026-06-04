@@ -35,21 +35,15 @@
 
                             <div>
 
-                                <p class="text-muted mb-1">
+                                <p class="text-muted mb-1 negri">
                                     Clientes
                                 </p>
-
-                                <h2 class="fw-bold">
-
-                                    {{ total_clientes }}
-
-                                </h2>
 
                             </div>
 
                             <div class="bg-primary text-white rounded-4 p-3">
 
-                                <i class="bi bi-people-fill fs-2"></i>
+                                <i class="bi bi-people-fill fs-2">{{ total_clientes }}</i>
 
                             </div>
 
@@ -76,17 +70,11 @@
                                     Ordens de Serviço
                                 </p>
 
-                                <h2 class="fw-bold">
-
-                                    {{ total_os }}
-
-                                </h2>
-
                             </div>
 
                             <div class="bg-success text-white rounded-4 p-3">
 
-                                <i class="bi bi-clipboard-check-fill fs-2"></i>
+                                <i class="bi bi-clipboard-check-fill fs-2">{{ total_registro_os }}</i>
 
                             </div>
 
@@ -112,18 +100,11 @@
                                 <p class="text-muted mb-1">
                                     Funcionários
                                 </p>
-
-                                <h2 class="fw-bold">
-
-                                    {{ total_funcionarios }}
-
-                                </h2>
-
                             </div>
 
                             <div class="bg-dark text-white rounded-4 p-3">
 
-                                <i class="bi bi-person-badge-fill fs-2"></i>
+                                <i class="bi bi-person-badge-fill fs-2">{{ total_funcionarios }}</i>
 
                             </div>
 
@@ -165,7 +146,7 @@
                 <!-- NOVA OS -->
                 <div class="col-md-4">
 
-                    <a href="#"
+                    <a href="{{ url_for('registro_os') }}"
                     class="btn btn-success w-100 p-4 shadow rounded-4">
 
                         <i class="bi bi-file-earmark-plus-fill fs-4"></i>
@@ -181,7 +162,7 @@
                 <!-- VER CLIENTES -->
                 <div class="col-md-4">
 
-                    <a href="#"
+                    <a href="{{ url_for('ver_clientes') }}"
                     class="btn btn-dark w-100 p-4 shadow rounded-4">
 
                         <i class="bi bi-people-fill fs-4"></i>
