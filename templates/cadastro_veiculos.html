@@ -45,7 +45,9 @@
                                     name="marca"
                                     class="form-control form-control-lg"
                                     placeholder="Ex: Volkswagen"
+                                    maxlength="50"
                                     required>
+                                    
                             </div>
 
                             <div class="col-md-6">
@@ -55,6 +57,7 @@
                                     name="modelo"
                                     class="form-control form-control-lg"
                                     placeholder="Ex: Gol"
+                                    maxlength="50"
                                     required>
                             </div>
 
@@ -64,6 +67,8 @@
                                     type="number"
                                     name="ano"
                                     class="form-control form-control-lg"
+                                    placeholder="Ex: 2020"
+                                    oninput="this.value=this.value.slice(0,4)"
                                     required>
                             </div>
 
@@ -74,6 +79,7 @@
                                     name="placa"
                                     class="form-control form-control-lg text-uppercase"
                                     placeholder="ABC1D23"
+                                    maxlength="7"
                                     required>
                             </div>
 
@@ -84,6 +90,7 @@
                                     name="cor"
                                     class="form-control form-control-lg"
                                     placeholder="Ex: Branco"
+                                    maxlength="25"
                                     required>
                             </div>
 
@@ -100,7 +107,8 @@
                                 name="observacoes"
                                 class="form-control"
                                 rows="5"
-                                placeholder="Adicione informações relevantes sobre o veículo"></textarea>
+                                placeholder="Adicione informações relevantes sobre o veículo"
+                                maxlength="150"></textarea>
 
                         </div>
 

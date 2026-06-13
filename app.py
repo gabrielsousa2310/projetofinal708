@@ -22,10 +22,6 @@ app.secret_key = '12345'
 
 @app.route('/', methods=['GET','POST'])
 def index():
-    if 'id_usuario' not in session:
-        print('Usuário não logado')
-        return redirect(url_for('index'))
-
     if request.method == 'POST':
         email = request.form.get('email')
         senha = request.form.get('senha')
@@ -45,6 +41,7 @@ def dashboard():
     if 'id_usuario' not in session:
         print('Usuário não logado')
         return redirect(url_for('index'))
+
     clientes = supabase.table('clientes').select('*').execute()
     registro_os = supabase.table('registro_os').select('*').execute()
     funcionarios = supabase.table('funcionarios').select('*').execute()
@@ -96,6 +93,7 @@ def cadastro_funcionarios():
     if request.method == 'POST':
         nome = request.form.get('nome')
         cpf = request.form.get('cpf')
+        
         telefone = request.form.get('telefone')
         email = request.form.get('email')
         endereco = request.form.get('endereco')
@@ -205,6 +203,7 @@ def ver_clientes():
     clientes = supabase.table('clientes').select('*').execute()
 
     return render_template('ver_clientes.html',clientes=clientes.data)  
+
 
 @app.route('/editar_cliente/<int:id>', methods=['GET', 'POST'])
 def editar_cliente(id):
