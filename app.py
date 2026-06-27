@@ -172,6 +172,8 @@ def cadastro_veiculos():
         print('Usuario nao logado')
         return redirect(url_for('index'))
     
+
+
     if request.method == 'POST':
         marca = request.form.get('marca')
         modelo = request.form.get('modelo')
@@ -179,6 +181,7 @@ def cadastro_veiculos():
         placa = request.form.get('placa')
         cor = request.form.get('cor')
         observacoes = request.form.get('observacoes')
+        cliente_id = request.form.get("cliente_id")
 
         dados = {
             'marca': marca,
@@ -186,12 +189,16 @@ def cadastro_veiculos():
             'ano': ano,
             'placa': placa,
             'cor': cor,
-            'observacoes': observacoes
+            'observacoes': observacoes,
+            'cliente_id': cliente_id
         }
 
         supabase.table('veiculos').insert(dados).execute()
         return redirect(url_for('cadastro_veiculos'))
-    return render_template('cadastro_veiculos.html')
+    
+    cliente = supabase.table('clientes').select("id,nome").execute()
+    
+    return render_template('cadastro_veiculos.html', cliente=cliente.data)
     
 
 @app.route('/ver_clientes')

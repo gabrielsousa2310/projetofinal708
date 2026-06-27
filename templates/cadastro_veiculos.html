@@ -32,11 +32,28 @@
                     <form method="POST">
 
                         <!-- INFORMAÇÕES PRINCIPAIS -->
+                         
                         <h5 class="fw-semibold mb-4">
                             Informações Principais
                         </h5>
 
                         <div class="row g-4">
+                            
+                            <div class="col-md-6">
+                                <label class="form-label">Cliente</label>
+                                
+                                <select name="cliente_id" id="cliente" class="form-control form-control-lg">
+                                    <option value="">Selecione</option>
+                                    {% for cliente in cliente %}
+                                    
+                                    <option value="{{cliente.id}}">{{cliente.nome}}</option>
+                                    
+                                    {% endfor %}
+
+                                </select>
+
+                            </div>
+
 
                             <div class="col-md-6">
                                 <label class="form-label">Marca</label>
