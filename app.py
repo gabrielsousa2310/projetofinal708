@@ -146,7 +146,8 @@ def registro_os():
         valor = request.form.get('valor')
         status = request.form.get('status')
         observacoes = request.form.get('observacoes')
-
+        cliente_id = request.form.get('cliente_id')
+        
         dados = {
             'cliente': cliente,
             'veiculo': veiculo,
@@ -156,14 +157,20 @@ def registro_os():
             'servico_realizado': servico_realizado,
             'valor': valor,
             'status': status,
-            'observacoes': observacoes
+            'observacoes': observacoes,
+            'cliente_id' : cliente_id
         }
 
         supabase.table('registro_os').insert(dados).execute()
         flash('Ordem de serviço registrada com sucesso!')
 
+           
+        
         return redirect(url_for('registro_os'))
-    return render_template('registro_os.html')
+    
+    cliente = supabase.table('clientes').select('id','nome').execute()
+
+    return render_template('registro_os.html', cliente=cliente.data)
     
 
 @app.route('/cadastro_veiculos', methods=['GET', 'POST'])

@@ -73,13 +73,17 @@
                             <label class="form-label fw-semibold">
                                 Cliente
                             </label>
+                            <select name="cliente_id" id="cliente_id" class="form-control form-control-lg rounded-3" >
+                                
+                                <option value="">Selecione</option>
 
-                            <input
-                                type="text"
-                                name="cliente"
-                                class="form-control form-control-lg rounded-3"
-                                placeholder="Nome do cliente"
-                                required>
+                                {% for cliente in cliente %}
+
+                                <option value={{cliente.id}}>{{cliente.nome}}</option>
+
+                                {% endfor %}
+
+                            </select>
 
                         </div>
 
