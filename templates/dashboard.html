@@ -12,11 +12,11 @@
         <div class="text-center mb-5">
 
             <h1 class="fw-bold">
-                Dashboard
+                Controle e gerenciamento do sistema
             </h1>
 
             <p class="text-muted">
-                Controle e gerenciamento do sistema
+                SEJA BEM-VINDO
             </p>
 
         </div>
@@ -117,89 +117,121 @@
             </div>
 
         </div>
-
-        <!-- AÇÕES RÁPIDAS -->
+        <!-- RELATORIO DE CLIENTES -->
         <div class="mt-5">
 
             <h3 class="fw-bold mb-4">
-                Ações rápidas
+                Relatório de clientes
             </h3>
 
-            <div class="row g-4">
+            <div>
 
-                <!-- CADASTRAR CLIENTE -->
-                <div class="col-md-4">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">Possui OS</th>
+                            <th scope="col">Email</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for info in clientes %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <td>{{ info.nome }}</td>
+                            <td>{{ info.telefone }}</td>
+                            <td>{% if info.registro_os %} Sim {% else %} Não {% endif %}</td>
+                            <td>{{ info.email }} </td>
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
 
-                    <a href="{{ url_for('cadastro_clientes') }}"
-                    class="btn btn-primary w-100 p-4 shadow rounded-4">
+            </div>
 
-                        <i class="bi bi-person-plus-fill fs-4"></i>
+    <!-- RELATORIO DE OS -->
+        <div class="mt-5">
 
-                        <br><br>
+            <h3 class="fw-bold mb-4">
+                Relatório de OS
+            </h3>
 
-                        Cadastrar Cliente
+            <div>
 
-                    </a>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">OS</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Funcionário</th>
+                            <th scope="col">Ordens de Serviço</th>
+                            <th scope="col">Veículo</th>
+                            <th scope="col">Placa</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ordem in relatorio %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <td>{{ ordem.clientes.nome }}</td>
+                            <td>{{ ordem.funcionarios.nome }}</td>
+                            <td>{{ ordem.id }}</td>
+                            <td>{{ ordem.veiculos.marca }} - {{ ordem.veiculos.modelo }}</td>
+                            <td>{{ ordem.veiculos.placa }}</td>
+                            <td>{{ ordem.status }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
 
-                </div>
+            </div>
 
-                <!-- NOVA OS -->
-                <div class="col-md-4">
 
-                    <a href="{{ url_for('registro_os') }}"
-                    class="btn btn-success w-100 p-4 shadow rounded-4">
+            <!-- VER CLIENTES -->
+            <div class="col-md-4">
 
-                        <i class="bi bi-file-earmark-plus-fill fs-4"></i>
+                <a href="{{ url_for('ver_clientes') }}" class="btn btn-dark w-100 p-4 shadow rounded-4">
 
-                        <br><br>
+                    <i class="bi bi-people-fill fs-4"></i>
 
-                        Nova Ordem de Serviço
+                    <br><br>
 
-                    </a>
+                    Ver Clientes
 
-                </div>
-
-                <!-- VER CLIENTES -->
-                <div class="col-md-4">
-
-                    <a href="{{ url_for('ver_clientes') }}"
-                    class="btn btn-dark w-100 p-4 shadow rounded-4">
-
-                        <i class="bi bi-people-fill fs-4"></i>
-
-                        <br><br>
-
-                        Ver Clientes
-
-                    </a>
-
-                </div>
+                </a>
 
             </div>
 
         </div>
 
-        <!-- ÁREA FUTURA -->
-        <div class="card border-0 shadow rounded-4 mt-5">
+    </div>
 
-            <div class="card-body text-center p-5">
+    <!-- ÁREA FUTURA -->
+    <div class="card border-0 shadow rounded-4 mt-5">
 
-                <i class="bi bi-bar-chart-line-fill fs-1 text-muted"></i>
+        <div class="card-body text-center p-5">
 
-                <h4 class="fw-bold mt-3">
-                    Área de relatórios
-                </h4>
+            <i class="bi bi-bar-chart-line-fill fs-1 text-muted"></i>
 
-                <p class="text-muted mb-0">
+            <h4 class="fw-bold mt-3">
+                Área de relatórios
+            </h4>
 
-                    Espaço reservado para gráficos, relatórios
-                    e movimentações do sistema.
+            <p class="text-muted mb-0">
 
-                </p>
+                Espaço reservado para gráficos, relatórios
+                e movimentações do sistema.
 
-            </div>
+            </p>
 
         </div>
+
+    </div>
 
     </div>
 
@@ -208,4 +240,4 @@
 
 
 
-{% endblock %}
+    {% endblock %}

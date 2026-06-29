@@ -41,21 +41,24 @@ def dashboard():
     if 'id_usuario' not in session:
         print('Usuário não logado')
         return redirect(url_for('index'))
-
-    clientes = supabase.table('clientes').select('*').execute()
+    
     registro_os = supabase.table('registro_os').select('*').execute()
     funcionarios = supabase.table('funcionarios').select('*').execute()
-
+    clientes = supabase.table('clientes').select('*,registro_os(id)').execute()
+    
     total_clientes = len(clientes.data) if clientes.data else 0 
     total_registro_os = len(registro_os.data) if registro_os.data else 0 
     total_funcionarios = len(funcionarios.data) if funcionarios.data else 0 
 
-    return render_template('dashboard.html',total_clientes=total_clientes, total_registro_os=total_registro_os, total_funcionarios=total_funcionarios)
+    relatorio = (supabase.table('registro_os').select('*, clientes(nome), funcionarios(nome), veiculos(placa, marca, modelo)').execute())
+    
+
+    return render_template('dashboard.html',total_clientes=total_clientes, total_registro_os=total_registro_os, total_funcionarios=total_funcionarios, relatorio=relatorio.data, clientes=clientes.data)
 
 
 @app.route('/cadastro_clientes',methods=['GET','POST'])
 def cadastro_clientes():
-    #verificar se o usuário está logado
+    
     if 'id_usuario' not in session:
         print('Usuário não logado')
         return redirect(url_for('index'))
@@ -85,18 +88,20 @@ def cadastro_clientes():
 
 @app.route('/cadastro_funcionarios', methods=['GET', 'POST'])
 def cadastro_funcionarios():
-    #verificar se o usuário está logado
+    
     if 'id_usuario' not in session:
         print('Usuário não logado')
         return redirect(url_for('index'))
 
     if request.method == 'POST':
+        
         nome = request.form.get('nome')
         cpf = request.form.get('cpf')
-        
         telefone = request.form.get('telefone')
         email = request.form.get('email')
         endereco = request.form.get('endereco')
+        numero = request.form.get('numero')
+        complemento = request.form.get('complemento')
 
         cargo = request.form.get('cargo')
         especialidade = request.form.get('especialidade')
@@ -113,6 +118,8 @@ def cadastro_funcionarios():
             'telefone': telefone,
             'email': email,
             'endereco': endereco,
+            'numero': numero,
+            'complemento': complemento,
             'cargo': cargo,
             'especialidade': especialidade,
             'salario': salario,
@@ -136,76 +143,69 @@ def registro_os():
         return redirect(url_for('index'))
 
     if request.method == 'POST':
-
-        cliente = request.form.get('cliente')
-        veiculo = request.form.get('veiculo')
-        placa = request.form.get('placa')
-        funcionario = request.form.get('funcionario')
+        cliente_id = request.form.get('cliente_id')
+        veiculo_id = request.form.get('veiculo_id')
+        funcionario_id = request.form.get('funcionario_id')
         problema_relatado = request.form.get('problema_relatado')
         servico_realizado = request.form.get('servico_realizado')
         valor = request.form.get('valor')
         status = request.form.get('status')
         observacoes = request.form.get('observacoes')
-        cliente_id = request.form.get('cliente_id')
-        
+
         dados = {
-            'cliente': cliente,
-            'veiculo': veiculo,
-            'placa': placa,
-            'funcionario': funcionario,
+            'cliente_id': cliente_id,
+            'veiculo_id': veiculo_id,
+            'funcionario_id': funcionario_id,
             'problema_relatado': problema_relatado,
             'servico_realizado': servico_realizado,
             'valor': valor,
             'status': status,
-            'observacoes': observacoes,
-            'cliente_id' : cliente_id
+            'observacoes': observacoes
         }
-
+        print(dados)
         supabase.table('registro_os').insert(dados).execute()
         flash('Ordem de serviço registrada com sucesso!')
 
-           
-        
         return redirect(url_for('registro_os'))
     
-    cliente = supabase.table('clientes').select('id','nome').execute()
-
-    return render_template('registro_os.html', cliente=cliente.data)
-    
+    clientes = supabase.table('clientes').select('*').execute()
+    funcionarios = supabase.table('funcionarios').select('*').execute()
+    veiculos = supabase.table('veiculos').select('*').execute()
+    registro_os = supabase.table('registro_os').select('*,clientes(nome),veiculos(marca,modelo,placa)').execute()
+    return render_template('registro_os.html', registro_os=registro_os.data, funcionarios=funcionarios.data, clientes=clientes.data, veiculos=veiculos.data)
 
 @app.route('/cadastro_veiculos', methods=['GET', 'POST'])
+
 def cadastro_veiculos():
     if 'id_usuario' not in session:
         print('Usuario nao logado')
         return redirect(url_for('index'))
     
-
-
     if request.method == 'POST':
+        cliente_id = request.form.get('cliente_id')
         marca = request.form.get('marca')
         modelo = request.form.get('modelo')
         ano = request.form.get('ano')
         placa = request.form.get('placa')
         cor = request.form.get('cor')
         observacoes = request.form.get('observacoes')
-        cliente_id = request.form.get("cliente_id")
 
         dados = {
+            'cliente_id': cliente_id,
             'marca': marca,
             'modelo': modelo,
             'ano': ano,
             'placa': placa,
             'cor': cor,
-            'observacoes': observacoes,
-            'cliente_id': cliente_id
+            'observacoes': observacoes
         }
 
         supabase.table('veiculos').insert(dados).execute()
         return redirect(url_for('cadastro_veiculos'))
     
-    cliente = supabase.table('clientes').select("id,nome").execute()
+    clientes = supabase.table('clientes').select('*').execute()
     
-    return render_template('cadastro_veiculos.html', cliente=cliente.data)
+    return render_template('cadastro_veiculos.html', clientes=clientes.data)
     
 
 @app.route('/ver_clientes')
@@ -217,7 +217,6 @@ def ver_clientes():
     clientes = supabase.table('clientes').select('*').execute()
 
     return render_template('ver_clientes.html',clientes=clientes.data)  
-
 
 @app.route('/editar_cliente/<int:id>', methods=['GET', 'POST'])
 def editar_cliente(id):

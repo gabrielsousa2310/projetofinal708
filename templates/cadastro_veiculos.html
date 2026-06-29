@@ -44,7 +44,8 @@
                                 
                                 <select name="cliente_id" id="cliente" class="form-control form-control-lg">
                                     <option value="">Selecione</option>
-                                    {% for cliente in cliente %}
+                                    
+                                        {% for cliente in clientes %}
                                     
                                     <option value="{{cliente.id}}">{{cliente.nome}}</option>
                                     
@@ -134,16 +135,13 @@
 
                         <div class="d-flex justify-content-between flex-wrap gap-3">
 
-                            <a href="{{ url_for('dashboard') }}"
-                               class="btn btn-light border px-4">
+                            <a href="{{ url_for('dashboard') }}" class="btn btn-light border px-4">
 
                                 Cancelar
 
                             </a>
 
-                            <button
-                                type="submit"
-                                class="btn btn-primary px-5">
+                            <button type="submit" class="btn btn-primary px-5">
 
                                 Salvar Veículo
 
