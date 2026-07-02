@@ -166,7 +166,7 @@
                         </select>
 
                     </div>
-                <div class="col-md-6">
+                    <div class="col-md-6">
 
                     <label class="form-label fw-semibold">
                         CNH
@@ -177,9 +177,8 @@
                         <label class="form-check-label" for="possui_cnh" >
                             Possui CNH
                         </label>
-                    </div>
 
-                </div>
+                    </div>
                 </div>
 
                 <!-- ENDEREÇO -->
@@ -204,9 +203,29 @@
                         </div>
 
                     </div>
+                        
+                    <div class="row g-3">
+                        <!-- Endereço (Ocupa a linha inteira) -->
+                        <div class="col-12">
+                            <label class="form-label">Endereço</label>
+                            <input type="text" name="endereco" class="form-control form-control-lg rounded-3"
+                        placeholder="Digite o endereço completo" maxlength="200">
+                        </div>
 
-                    <input type="text" name="endereco" class="form-control form-control-lg rounded-3"
-                        placeholder="Digite o endereço completo" maxlength="150">
+                        <!-- Número -->
+                        <div class="col-md-6 col-12">
+                            <label class="form-label">Número</label>
+                            <input type="text" name="numero" class="form-control form-control-lg rounded-3" placeholder="Ex: 123">
+                        </div>
+
+                        <!-- Complemento (Fica abaixo, na metade da direita) -->
+                        <div class="col-md-6 col-12">
+                            <label class="form-label">Complemento</label>
+                            <input type="text" name="complemento" class="form-control form-control-lg rounded-3" placeholder="Apto, Bloco, Casa">
+                        </div>
+                    </div> 
+
+                    
 
                 </div>
 
