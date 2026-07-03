@@ -43,9 +43,7 @@
 
                 <!-- CLIENTE E VEÍCULO -->
                 <div class="mb-5">
-
                     <div class="d-flex align-items-center mb-4">
-
                         <div class="bg-primary rounded-3 p-2 text-white me-3">
                             <i class="bi bi-car-front-fill"></i>
                         </div>
@@ -59,248 +57,230 @@
                             <small class="text-muted">
                                 Dados do cliente e do veículo
                             </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">
+                            Cliente
+                        </label>
+                        <select name="cliente_id" class="form-control form-control-lg rounded-3" required>
 
+                            <option value="">
+                                Selecione um cliente
+                            </option>
+
+                            {% for cliente in clientes %}
+
+                            <option value="{{ cliente.id }}">
+                                {{ cliente.nome }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+                        <div>
+                            <button type="button" class="btn btn px-1 py-1 rounded-2 mb-3">
+                                <a href="{{ url_for('cadastro_clientes') }}">cadastrar cliente</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">
+                            Veículo
+                        </label>
+                        <select name="veiculo_id" class="form-control form-control-lg rounded-3" required>
+
+                            <option value="">
+                                Selecione um veículo
+                            </option>
+
+                            {% for veiculo in veiculos %}
+
+                            <option value="{{ veiculo.id }}">
+                                {{ veiculo.marca }} - {{ veiculo.modelo }} - {{ veiculo.placa }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+                        <div>
+                            <button type="button" class="btn btn- px-1 py-1 rounded-2 mb-3">
+                                <a href="{{ url_for('cadastro_veiculos') }}">cadastrar veículo</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RESPONSÁVEL -->
+                <div class="mb-5">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-success rounded-3 p-2 text-white me-3">
+                            <i class="bi bi-person-badge-fill"></i>
                         </div>
 
+                        <div>
+
+                            <h4 class="fw-bold mb-0">
+                                Responsável
+                            </h4>
+
+                            <small class="text-muted">
+                                Funcionário responsável pelo serviço
+                            </small>
+                        </div>
                     </div>
 
-                    <div class="row g-4">
-
-                        <div>
+                    <div class="row">
+                        <div class="col-md-6">
                             <label class="form-label fw-semibold">
-                                Cliente
+                                Funcionário
                             </label>
-                            <select name="cliente_id" class="form-control form-control-lg rounded-3" required>
+                            <select name="funcionario_id" class="form-control form-control-lg  rounded-3" required>
 
                                 <option value="">
-                                    Selecione um cliente
+                                    Selecione um funcionário
                                 </option>
 
-                                {% for cliente in clientes %}
 
-                                <option value="{{ cliente.id }}">
-                                    {{ cliente.nome }}
+                                {% for funcionario in funcionarios %}
+
+                                <option value="{{ funcionario.id }}">
+                                    {{ funcionario.nome }}
                                 </option>
 
                                 {% endfor %}
-
                             </select>
+                            <div>
+                                <button type="button" class="btn btn- px-1 py-1 rounded-2 mb-3">
+                                    <a href="{{ url_for('cadastro_funcionarios') }}">cadastrar funcionário</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SERVIÇO -->
+                    <div class="mb-5">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-warning rounded-3 p-2 text-white me-3">
+                                <i class="bi bi-tools"></i>
+                            </div>
+                            <div>
+
+                                <h4 class="fw-bold mb-0">
+                                    Serviço
+                                </h4>
+
+                                <small class="text-muted">
+                                    Informações da manutenção
+                                </small>
+
+                            </div>
 
                         </div>
-                        <div>
-                            <div>
+
+                        <div class="row g-4">
+
+                            <div class="col-12">
+
                                 <label class="form-label fw-semibold">
-                                    Veículo
+                                    Problema relatado
                                 </label>
-                                <select name="veiculo_id" class="form-control form-control-lg rounded-3" required>
 
-                                    <option value="">
-                                        Selecione um veículo
-                                    </option>
+                                <textarea name="problema_relatado" class="form-control rounded-3" rows="4"
+                                    placeholder="Descreva o problema informado pelo cliente"></textarea>
 
-                                    {% for veiculo in veiculos %}
+                            </div>
 
-                                    <option value="{{ veiculo.id }}">
-                                        {{ veiculo.marca }} - {{ veiculo.modelo }} - {{ veiculo.placa }}
-                                    </option>
+                            <div class="col-12">
 
-                                    {% endfor %}
+                                <label class="form-label fw-semibold">
+                                    Serviço realizado
+                                </label>
+
+                                <textarea name="servico_realizado" class="form-control rounded-3" rows="4"
+                                    placeholder="Descreva o serviço executado"></textarea>
+
+                            </div>
+
+                            <div class="col-md-4">
+
+                                <label class="form-label fw-semibold">
+                                    Valor (R$)
+                                </label>
+
+                                <input type="number" step="0.01" name="valor"
+                                    class="form-control form-control-lg rounded-3" placeholder="0,00">
+
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">
+                                    Status
+                                </label>
+
+                                <select name="status" class="form-select form-select-lg rounded-3" required>
+
+                                    <option value="">Selecione</option>
+                                    <option value="Aberta">Aberta</option>
+                                    <option value="Em andamento">Em andamento</option>
+                                    <option value="Aguardando peça">Aguardando peça</option>
+                                    <option value="Concluída">Concluída</option>
+                                    <option value="Entregue">Entregue</option>
+                                    <option value="Cancelada">Cancelada</option>
 
                                 </select>
-
                             </div>
-
                         </div>
+                    </div>
 
-                        <!-- RESPONSÁVEL -->
-                        <div class="mb-5">
+                    <!-- OBSERVAÇÕES -->
+                    <div class="mb-5">
+                        <div class="d-flex align-items-center mb-4">
 
-                            <div class="d-flex align-items-center mb-4">
-
-                                <div class="bg-success rounded-3 p-2 text-white me-3">
-                                    <i class="bi bi-person-badge-fill"></i>
-                                </div>
-
-                                <div>
-
-                                    <h4 class="fw-bold mb-0">
-                                        Responsável
-                                    </h4>
-
-                                    <small class="text-muted">
-                                        Funcionário responsável pelo serviço
-                                    </small>
-
-                                </div>
-
+                            <div class="bg-dark rounded-3 p-2 text-white me-3">
+                                <i class="bi bi-chat-left-text-fill"></i>
                             </div>
 
-                            <div class="row">
+                            <div>
 
-                                <div class="col-md-6">
+                                <h4 class="fw-bold mb-0">
+                                    Observações
+                                </h4>
 
-                                    <label class="form-label fw-semibold">
-                                        Funcionário
-                                    </label>
-
-                                    <div class="row g-4">
-
-                                        <div>
-
-                                            <select name="funcionario_id" class="form-control form-control-lg rounded-3" required>
-
-                                                <option value="">
-                                                    Selecione um funcionário
-                                                </option>
-
-                                                {% for funcionario in funcionarios %}
-
-                                                <option value="{{ funcionario.id }}">
-                                                    {{ funcionario.nome }}
-                                                </option>
-
-                                                {% endfor %}
-
-                                            </select>
-
-                                        </div>
-
-
-                                    </div>
-
-                                </div>
+                                <small class="text-muted">
+                                    Informações adicionais
+                                </small>
 
                             </div>
+                        </div>
+                        <div>
+                            <textarea name="observacoes" class="form-control rounded-3" rows="5"
+                                placeholder="Digite observações adicionais"></textarea>
+                        </div>
+                    </div>
 
-                            <!-- SERVIÇO -->
-                            <div class="mb-5">
+                    <!-- BOTÕES -->
+                    <div class="d-flex justify-content-end gap-3 flex-wrap">
 
-                                <div class="d-flex align-items-center mb-4">
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary px-4 py-2 rounded-3">
 
-                                    <div class="bg-warning rounded-3 p-2 text-white me-3">
-                                        <i class="bi bi-tools"></i>
-                                    </div>
+                            Voltar
 
-                                    <div>
+                        </a>
 
-                                        <h4 class="fw-bold mb-0">
-                                            Serviço
-                                        </h4>
+                        <button type="submit" class="btn btn-primary px-5 py-2 rounded-3 shadow-sm">
 
-                                        <small class="text-muted">
-                                            Informações da manutenção
-                                        </small>
+                            <i class="bi bi-check-circle-fill me-2"></i>
 
-                                    </div>
+                            Registrar OS
 
-                                </div>
+                        </button>
 
-                                <div class="row g-4">
-
-                                    <div class="col-12">
-
-                                        <label class="form-label fw-semibold">
-                                            Problema relatado
-                                        </label>
-
-                                        <textarea name="problema_relatado" class="form-control rounded-3" rows="4"
-                                            placeholder="Descreva o problema informado pelo cliente"></textarea>
-
-                                    </div>
-
-                                    <div class="col-12">
-
-                                        <label class="form-label fw-semibold">
-                                            Serviço realizado
-                                        </label>
-
-                                        <textarea name="servico_realizado" class="form-control rounded-3" rows="4"
-                                            placeholder="Descreva o serviço executado"></textarea>
-
-                                    </div>
-
-                                    <div class="col-md-4">
-
-                                        <label class="form-label fw-semibold">
-                                            Valor (R$)
-                                        </label>
-
-                                        <input type="number" step="0.01" name="valor"
-                                            class="form-control form-control-lg rounded-3" placeholder="0,00">
-
-                                    </div>
-
-                                    <div class="col-md-4">
-
-                                        <label class="form-label fw-semibold">
-                                            Status
-                                        </label>
-
-                                        <select name="status" class="form-select form-select-lg rounded-3" required>
-
-                                            <option value="">Selecione</option>
-                                            <option value="Aberta">Aberta</option>
-                                            <option value="Em andamento">Em andamento</option>
-                                            <option value="Aguardando peça">Aguardando peça</option>
-                                            <option value="Concluída">Concluída</option>
-                                            <option value="Entregue">Entregue</option>
-                                            <option value="Cancelada">Cancelada</option>
-
-                                        </select>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <!-- OBSERVAÇÕES -->
-                            <div class="mb-5">
-
-                                <div class="d-flex align-items-center mb-4">
-
-                                    <div class="bg-dark rounded-3 p-2 text-white me-3">
-                                        <i class="bi bi-chat-left-text-fill"></i>
-                                    </div>
-
-                                    <div>
-
-                                        <h4 class="fw-bold mb-0">
-                                            Observações
-                                        </h4>
-
-                                        <small class="text-muted">
-                                            Informações adicionais
-                                        </small>
-
-                                    </div>
-
-                                </div>
-
-                                <textarea name="observacoes" class="form-control rounded-3" rows="5"
-                                    placeholder="Digite observações adicionais"></textarea>
-
-                            </div>
-
-                            <!-- BOTÕES -->
-                            <div class="d-flex justify-content-end gap-3 flex-wrap">
-
-                                <a href="{{ url_for('dashboard') }}"
-                                    class="btn btn-outline-secondary px-4 py-2 rounded-3">
-
-                                    Voltar
-
-                                </a>
-
-                                <button type="submit" class="btn btn-primary px-5 py-2 rounded-3 shadow-sm">
-
-                                    <i class="bi bi-check-circle-fill me-2"></i>
-
-                                    Registrar OS
-
-                                </button>
-
-                            </div>
+                    </div>
 
             </form>
 

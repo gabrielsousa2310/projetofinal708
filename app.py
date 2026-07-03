@@ -35,6 +35,7 @@ def index():
             print('Usuário não cadastrado')
     return render_template('index.html')
 
+#PAGINA INICIAL 
 
 @app.route('/dashboard')
 def dashboard():
@@ -46,6 +47,8 @@ def dashboard():
     funcionarios = supabase.table('funcionarios').select('*').execute()
     clientes = supabase.table('clientes').select('*,registro_os(id)').execute()
     
+
+
     total_clientes = len(clientes.data) if clientes.data else 0 
     total_registro_os = len(registro_os.data) if registro_os.data else 0 
     total_funcionarios = len(funcionarios.data) if funcionarios.data else 0 
@@ -55,7 +58,7 @@ def dashboard():
 
     return render_template('dashboard.html',total_clientes=total_clientes, total_registro_os=total_registro_os, total_funcionarios=total_funcionarios, relatorio=relatorio.data, clientes=clientes.data)
 
-
+#ROTAS DE CADASTRO DE CLIENTES, FUNCIONARIOS, VEICULOS E REGISTRO DE ORDEM DE SERVIÇO
 @app.route('/cadastro_clientes',methods=['GET','POST'])
 def cadastro_clientes():
     
@@ -172,6 +175,7 @@ def registro_os():
     funcionarios = supabase.table('funcionarios').select('*').execute()
     veiculos = supabase.table('veiculos').select('*').execute()
     registro_os = supabase.table('registro_os').select('*,clientes(nome),veiculos(marca,modelo,placa)').execute()
+    
     return render_template('registro_os.html', registro_os=registro_os.data, funcionarios=funcionarios.data, clientes=clientes.data, veiculos=veiculos.data)
 
 @app.route('/cadastro_veiculos', methods=['GET', 'POST'])
@@ -207,16 +211,39 @@ def cadastro_veiculos():
     
     return render_template('cadastro_veiculos.html', clientes=clientes.data)
     
+#LISTAGEM DE CLIENTES, FUNCIONARIOS, VEICULOS E REGISTRO DE ORDEM DE SERVIÇO
 
-@app.route('/ver_clientes')
-def ver_clientes():
+@app.route('/listar_clientes')
+def listar_clientes():
     if 'id_usuario' not in session:
         print('Usuario nao logado')
         return redirect(url_for('index'))
 
     clientes = supabase.table('clientes').select('*').execute()
 
-    return render_template('ver_clientes.html',clientes=clientes.data)  
+    return render_template('listar_clientes.html',clientes=clientes.data) 
+
+@app.route('/listar_os')
+def listar_os():
+    if 'id_usuario' not in session:
+        print('Usuario nao logado')
+        return redirect(url_for('index'))
+    
+    os_service = supabase.table('registro_os').select('*, clientes(id, nome), funcionarios(id, nome), veiculos(marca,modelo,placa)').execute()
+
+    return render_template('listar_os.html',os_service=os_service.data)
+
+# GERENCIAMENTO DO SISTEMA, EXCLUSAO, EDICAO E LOGOUT
+
+@app.route('/excluir_os/<int:id>')
+def excluir_os(id):
+    if 'id_usuario' not in session:
+        print('Usuario nao logado')
+        return redirect(url_for('index'))
+    
+    supabase.table('registro_os').delete().eq('id', id).execute()
+
+    return redirect(url_for('listar_os'))
 
 @app.route('/editar_cliente/<int:id>', methods=['GET', 'POST'])
 def editar_cliente(id):
@@ -241,10 +268,16 @@ def editar_cliente(id):
     cliente = supabase.table('clientes').select('*').eq('id', id).execute()
     return render_template('editar_cliente.html', cliente=cliente.data[0])
 
-@app.route('/excluir_cliente/<int:id>')
-def excluir_cliente(id):
-    supabase.table('clientes').delete().eq('id', id).execute()
-    return redirect(url_for('ver_clientes'))
+@app.route('/excluir_veiculo/<int:id>')
+def excluir_veiculo(id):
+    if 'id_usuario' not in session:
+        print('Usuario nao logado')
+
+    veiculos = supabase.table('veiculos').delete().eq('id', id).execute()
+    
+    return redirect(url_for('ver_clientes', veiculos=veiculos.data))
+
+@app.route('/editar_cliente/<int:id>', methods=['GET', 'POST'])
 
 
 @app.route('/sair')

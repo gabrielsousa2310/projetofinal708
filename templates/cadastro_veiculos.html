@@ -6,50 +6,43 @@
 
     <div class="row justify-content-center">
 
-        <div class="col-xl-10">
+        <div class="col-xl-12">
 
+            <div class="mb-5">
+                <h1 class="fw-bold">
+                    Cadastro de Veículo
+                </h1>
+
+                <p class="text-muted mb-0">
+                    Registre as informações do veículo no sistema.
+                </p>
+            </div>
             <div class="card border-0 shadow rounded-4">
 
                 <!-- CABEÇALHO -->
-                <div class="card-header bg-white border-0 p-4">
-
-                    <span class="badge bg-primary px-3 py-2 mb-3">
-                        Veículo
-                    </span>
-
-                    <h2 class="fw-bold mb-1">
-                        Cadastro de Veículo
-                    </h2>
-
-                    <p class="text-muted mb-0">
-                        Registre as informações do veículo no sistema.
-                    </p>
-
-                </div>
 
                 <div class="card-body p-4 p-md-5">
-
                     <form method="POST">
 
                         <!-- INFORMAÇÕES PRINCIPAIS -->
-                         
+
                         <h5 class="fw-semibold mb-4">
                             Informações Principais
                         </h5>
 
                         <div class="row g-4">
-                            
+
                             <div class="col-md-6">
                                 <label class="form-label">Cliente</label>
-                                
+
                                 <select name="cliente_id" id="cliente" class="form-control form-control-lg">
                                     <option value="">Selecione</option>
-                                    
-                                        {% for cliente in clientes %}
-                                    
+
+                                    {% for cliente in clientes %}
+
                                     <option value="{{cliente.id}}">{{cliente.nome}}</option>
-                                    
-                                        {% endfor %}
+
+                                    {% endfor %}
 
                                 </select>
 
@@ -58,58 +51,33 @@
 
                             <div class="col-md-6">
                                 <label class="form-label">Marca</label>
-                                <input
-                                    type="text"
-                                    name="marca"
-                                    class="form-control form-control-lg"
-                                    placeholder="Ex: Volkswagen"
-                                    maxlength="50"
-                                    required>
-                                    
+                                <input type="text" name="marca" class="form-control form-control-lg"
+                                    placeholder="Ex: Volkswagen" maxlength="50" required>
+
                             </div>
 
                             <div class="col-md-6">
                                 <label class="form-label">Modelo</label>
-                                <input
-                                    type="text"
-                                    name="modelo"
-                                    class="form-control form-control-lg"
-                                    placeholder="Ex: Gol"
-                                    maxlength="50"
-                                    required>
+                                <input type="text" name="modelo" class="form-control form-control-lg"
+                                    placeholder="Ex: Gol" maxlength="50" required>
                             </div>
 
                             <div class="col-md-4">
                                 <label class="form-label">Ano</label>
-                                <input
-                                    type="number"
-                                    name="ano"
-                                    class="form-control form-control-lg"
-                                    placeholder="Ex: 2020"
-                                    oninput="this.value=this.value.slice(0,4)"
-                                    required>
+                                <input type="number" name="ano" class="form-control form-control-lg"
+                                    placeholder="Ex: 2020" oninput="this.value=this.value.slice(0,4)" required>
                             </div>
 
                             <div class="col-md-4">
                                 <label class="form-label">Placa</label>
-                                <input
-                                    type="text"
-                                    name="placa"
-                                    class="form-control form-control-lg text-uppercase"
-                                    placeholder="ABC1D23"
-                                    maxlength="7"
-                                    required>
+                                <input type="text" name="placa" class="form-control form-control-lg text-uppercase"
+                                    placeholder="ABC1D23" maxlength="7" required>
                             </div>
 
                             <div class="col-md-4">
                                 <label class="form-label">Cor</label>
-                                <input
-                                    type="text"
-                                    name="cor"
-                                    class="form-control form-control-lg"
-                                    placeholder="Ex: Branco"
-                                    maxlength="25"
-                                    required>
+                                <input type="text" name="cor" class="form-control form-control-lg"
+                                    placeholder="Ex: Branco" maxlength="25" required>
                             </div>
 
                         </div>
@@ -121,10 +89,7 @@
                                 Observações
                             </h5>
 
-                            <textarea
-                                name="observacoes"
-                                class="form-control"
-                                rows="5"
+                            <textarea name="observacoes" class="form-control" rows="5"
                                 placeholder="Adicione informações relevantes sobre o veículo"
                                 maxlength="150"></textarea>
 
