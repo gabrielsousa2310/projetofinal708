@@ -1,56 +1,160 @@
 {% extends "base.html" %}
 {% block content %}
 
- <h1 class="text-center mt-5 fw-bold" >SuperOS</h1>
+<div class="container-fluid">
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-5 col-lg-4">
+    <div class="row min-vh-100">
 
-            <div class="card shadow border-0 rounded-4 p-4 mt-4">
+        <!-- Lado esquerdo -->
+        <div class="col-lg-7 d-flex flex-column justify-content-center bg-dark text-white p-5">
+
+            <h1 class="display-4 fw-bold mb-4">
+                SuperOS
+            </h1>
+
+            <p class="fs-4 mb-4">
+                Gestão completa para oficinas mecânicas.
+            </p>
+
+            <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9_McTenToQE1-61-XDXafE8mBh3Pru3Uq-997IkRVqA&s=10"
+                class="img-fluid rounded shadow-lg"
+                alt="Oficina Mecânica">
+
+        </div>
+
+        <!-- Lado direito -->
+        <div class="col-lg-5 d-flex align-items-center justify-content-center">
+
+            <div class="w-75">
 
                 <div class="text-center mb-4">
-                    <i class="bi bi-person-circle fs-1 text-decoration-line-through"></i>
+
+                    <i class="bi bi-person-circle text-primary display-3"></i>
+
+                    <h3 class="fw-bold mt-3">
+                        Bem-vindo
+                    </h3>
+
+                    <p class="text-muted">
+                        Faça login para acessar o sistema
+                    </p>
+
                 </div>
-              
-                <form action="/" method="POST">
 
-                    <div class="mb-3">
-                        <label for="email" class="form-label">
-                            E-mail
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            class="form-control rounded-3"
-                            placeholder="Digite seu e-mail">
-                    </div>
+                <div class="card shadow-lg border-0 rounded-4 p-4">
 
-                    <div class="mb-3">
-                        <label for="senha" class="form-label">
-                            Senha
-                        </label>
-                        <input
-                            type="password"
-                            id="senha"
-                            name="senha"
-                            class="form-control rounded-3"
-                            placeholder="Digite sua senha">
-                    </div>
+                    <form action="/" method="POST">
 
-                    <button
-                        class="btn btn-primary w-100 rounded-3"
-                        type="submit">
-                        Entrar
-                    </button>
+                        <div class="mb-3">
 
-                </form>
+                            <label class="form-label fw-semibold">
+                                E-mail
+                            </label>
+
+                            <input
+                                type="email"
+                                class="form-control form-control-lg"
+                                name="email"
+                                placeholder="Digite seu e-mail"
+                                required>
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+                                Senha
+                            </label>
+
+                            <input
+                                type="password"
+                                class="form-control form-control-lg"
+                                name="senha"
+                                placeholder="Digite sua senha"
+                                required>
+
+                        </div>
+
+                        <button
+                            class="btn btn-primary btn-lg w-100">
+
+                            <i class="bi bi-box-arrow-in-right me-2"></i>
+
+                            Entrar
+
+                        </button>
+
+                    </form>
+
+                </div>
 
             </div>
 
         </div>
+
     </div>
+
 </div>
 
-    {% endblock %}
+<footer class="bg-dark text-white py-4">
+
+    <div class="container">
+
+        <div class="row text-center">
+
+            <div class="col-md-3">
+
+                <h5>SuperOS</h5>
+
+                <p class="small">
+                    Sistema para Oficinas Mecânicas
+                </p>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <h5>Contato</h5>
+
+                <p class="small">
+                   55+ (85) 991269158
+                </p>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <h5>E-mail</h5>
+
+                <p class="small">
+                    contato@superos.com
+                </p>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <h5>Endereço</h5>
+
+                <p class="small">
+                    Av. Principal, 6864, Bairro Centro, Fortaleza - CE
+                </p>
+
+            </div>
+
+        </div>
+
+        <hr class="border-light">
+
+        <div class="text-center">
+
+            © 2026 SuperOS - Todos os direitos reservados.
+
+        </div>
+
+    </div>
+
+</footer>
+
+{% endblock %}
