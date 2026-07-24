@@ -1,0 +1,240 @@
+{% extends "baselogado.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- TOPO -->
+    <div class="mb-5">
+
+        <h1 class="fw-bold">
+            Editar Cliente
+        </h1>
+
+        <p class="text-muted mb-0">
+            Atualize as informações do cliente cadastradas no sistema.
+        </p>
+
+    </div>
+
+    <!-- CARD -->
+    <div class="card border-0 shadow-lg rounded-4">
+
+        <div class="card-body p-4 p-md-5">
+
+            <form action="{{ url_for('editar_clientes', id=cliente.id) }}" method="POST">
+
+                <!-- DADOS PESSOAIS -->
+                <div class="mb-5">
+
+                    <div class="d-flex align-items-center mb-4">
+
+                        <div class="bg-primary rounded-3 p-2 text-white me-3">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+
+                        <div>
+
+                            <h4 class="fw-bold mb-0">
+                                Dados pessoais
+                            </h4>
+
+                            <small class="text-muted">
+                                Atualize as informações básicas do cliente.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row g-4">
+
+                        <!-- NOME -->
+                        <div class="col-md-6">
+
+                            <label class="form-label fw-semibold">
+                                Nome completo
+                            </label>
+
+                            <input
+                                type="text"
+                                name="nome"
+                                class="form-control form-control-lg rounded-3"
+                                value="{{ cliente.nome }}"
+                                maxlength="100"
+                                required>
+
+                        </div>
+
+                        <!-- TELEFONE -->
+                        <div class="col-md-6">
+
+                            <label class="form-label fw-semibold">
+                                Telefone
+                            </label>
+
+                            <input
+                                type="text"
+                                name="telefone"
+                                class="form-control form-control-lg rounded-3"
+                                value="{{ cliente.telefone }}"
+                                maxlength="11"
+                                minlength="11">
+
+                        </div>
+
+                        <!-- EMAIL -->
+                        <div class="col-md-6">
+
+                            <label class="form-label fw-semibold">
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                name="email"
+                                class="form-control form-control-lg rounded-3"
+                                value="{{ cliente.email }}"
+                                maxlength="100">
+
+                        </div>
+
+                        <!-- CPF -->
+                        <div class="col-md-6">
+
+                            <label class="form-label fw-semibold">
+                                CPF
+                            </label>
+
+                            <input
+                                type="text"
+                                name="cpf"
+                                class="form-control form-control-lg rounded-3"
+                                value="{{ cliente.cpf }}"
+                                maxlength="11"
+                                minlength="11">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ENDEREÇO -->
+                <div class="mb-5">
+
+                    <div class="d-flex align-items-center mb-4">
+
+                        <div class="bg-success rounded-3 p-2 text-white me-3">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+
+                        <div>
+
+                            <h4 class="fw-bold mb-0">
+                                Endereço
+                            </h4>
+
+                            <small class="text-muted">
+                                Atualize o endereço do cliente.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row g-4">
+
+                        <div class="col-12">
+
+                            <label class="form-label fw-semibold">
+                                Endereço completo
+                            </label>
+
+                            <input
+                                type="text"
+                                name="endereco"
+                                class="form-control form-control-lg rounded-3"
+                                value="{{ cliente.endereco }}"
+                                maxlength="200">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- OBSERVAÇÕES -->
+                <div class="mb-5">
+
+                    <div class="d-flex align-items-center mb-4">
+
+                        <div class="bg-dark rounded-3 p-2 text-white me-3">
+                            <i class="bi bi-chat-left-text-fill"></i>
+                        </div>
+
+                        <div>
+
+                            <h4 class="fw-bold mb-0">
+                                Observações
+                            </h4>
+
+                            <small class="text-muted">
+                                Atualize informações adicionais sobre o cliente.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-12">
+
+                            <label class="form-label fw-semibold">
+                                Observações adicionais
+                            </label>
+
+                            <textarea
+                                name="observacoes"
+                                class="form-control rounded-3"
+                                rows="5"
+                                maxlength="150">{{ cliente.observacoes }}</textarea>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- BOTÕES -->
+                <div class="d-flex justify-content-end gap-3 flex-wrap">
+
+                    <a href="{{ url_for('listar_clientes') }}"
+                       class="btn btn-outline-secondary px-4 py-2 rounded-3">
+
+                        Voltar
+
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="btn btn-success px-5 py-2 rounded-3 shadow-sm">
+
+                        <i class="bi bi-save-fill me-2"></i>
+
+                        Salvar Alterações
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
