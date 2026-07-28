@@ -86,7 +86,7 @@
                                 </a> -->
                                 <button type="button" class="btn btn-danger bnt-sm" data-bs-toggle="modal"
                                     data-bs-target="#modal{{ cliente.id }}">
-                                    inativar
+                                    ativar
                                 </button>
                                 <div class="modal fade" id="modal{{ cliente.id }}" tabindex="-1">
 
@@ -95,7 +95,7 @@
                                         <div class="modal-content">
 
                                             <div class="modal-header">
-                                                <h5 class="modal-title " > Atenção !</h5>
+                                                <h5 class="modal-title"> Atenção </h5>
 
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal">
                                                 </button>
@@ -103,12 +103,7 @@
 
                                             <div class="modal-body">
                                                 O cliente <strong>{{ cliente.nome }}</strong> será marcado como
-                                                <strong>inativo</strong>.
-
-                                                <br><br>
-
-                                                Seus veículos e o histórico de Ordens de Serviço permanecerão
-                                                cadastrados no sistema.
+                                                <strong>ativo</strong>.
 
                                                 <br><br>
 
@@ -122,9 +117,9 @@
                                                     Cancelar
                                                 </button>
 
-                                                <a href="{{ url_for('inativar_cliente', id=cliente.id) }}"
+                                                <a href="{{ url_for('reativar_cliente', id=cliente.id) }}"
                                                     class="btn btn-danger">
-                                                    inativar
+                                                    reativar
                                                     </i>
                                                 </a>
 

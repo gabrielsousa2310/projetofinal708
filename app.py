@@ -191,10 +191,20 @@ def registro_os():
     clientes = supabase.table("clientes").select("*").execute()
     funcionarios = supabase.table("funcionarios").select("*").execute()
     veiculos = supabase.table("veiculos").select("*").execute()
-    registro_os = (supabase.table("registro_os").select("*,clientes(nome),veiculos(marca,modelo,placa)").execute())
+    registro_os = (
+        supabase.table("registro_os")
+        .select("*,clientes(nome),veiculos(marca,modelo,placa)")
+        .execute()
+    )
+    os = (
+        supabase.table("registro_os")
+        .select("*, clientes(nome), funcionarios(nome), veiculos(placa)")
+        .execute()
+    )
 
     return render_template(
         "os/registro_os.html",
+        os=os.data,
         registro_os=registro_os.data,
         funcionarios=funcionarios.data,
         clientes=clientes.data,
@@ -244,9 +254,20 @@ def listar_clientes():
         print("Usuario nao logado")
         return redirect(url_for("index"))
 
-    clientes = supabase.table("clientes").select("*").order("nome").execute()
+    clientes = supabase.table("clientes").select("*").eq("ativo", True).execute()
 
     return render_template("clientes/listar_clientes.html", clientes=clientes.data)
+
+
+@app.route("/listar_clientes_inativos")
+def listar_clientes_inativos():
+    if "id_usuario" not in session:
+        print("Usuario nao logado")
+        return redirect(url_for("index"))
+    
+    clientes = supabase.table("clientes").select("*").eq("ativo", False).order("nome").execute()
+
+    return render_template("clientes/listar_clientes_inativos.html", clientes=clientes.data)
 
 
 @app.route("/listar_os")
@@ -256,7 +277,11 @@ def listar_os():
         return redirect(url_for("index"))
 
     os_service = (
-        supabase.table("registro_os").select("*, clientes(id, nome), funcionarios(id, nome), veiculos(marca,modelo,placa)").execute()
+        supabase.table("registro_os")
+        .select(
+            "*, clientes(id, nome), funcionarios(id, nome), veiculos(marca,modelo,placa)"
+        )
+        .execute()
     )
 
     return render_template("os/listar_os.html", os_service=os_service.data)
@@ -339,29 +364,65 @@ def editar_os(id):
 
         supabase.table("registro_os").update(dados).eq("id", id).execute()
         return redirect(url_for("listar_os"))
-    
+
     clientes = supabase.table("clientes").select("*").execute()
-    funcionarios = supabase.table("funcionarios").select("*").execute()        
+    funcionarios = supabase.table("funcionarios").select("*").execute()
     veiculos = supabase.table("veiculos").select("*").execute()
-    
+
     return render_template(
-            "os/editar_os.html",
-            funcionarios=funcionarios.data,
-            clientes=clientes.data,
-            veiculos=veiculos.data,
-        )
+        "os/editar_os.html",
+        funcionarios=funcionarios.data,
+        clientes=clientes.data,
+        veiculos=veiculos.data,
+    )
 
 
+@app.route("/excluir_cliente/<int:id>")
+def excluir_cliente(id):
+    if "id_usuario" not in session:
+        print("Usuario nao logado")
+        return redirect(url_for("index"))
+
+    supabase.table("clientes").delete().eq("id", id).execute()
+
+    return redirect(url_for("listar_clientes"))
+
+
+@app.route("/inativar_cliente/<int:id>")
+def inativar_cliente(id):
+
+    if "id_usuario" not in session:
+        print("Usuario nao logado")
+        return redirect(url_for("index"))
+
+    supabase.table("clientes").update({"ativo": False}).eq("id", id).execute()
+
+    return redirect(url_for("listar_clientes"))
+
+@app.route("/reativar_cliente/<int:id>")
+def reativar_cliente(id):
+    
+    if "id_usuario" not in session:
+        print("Usuario nao logado")
+        return redirect(url_for("index"))
+
+    supabase.table("clientes").update({"ativo": True}).eq("id", id).execute()
+
+    return redirect(url_for("listar_clientes_inativos"))
+
+# EXCLUSAO DE VEICULO
 @app.route("/excluir_veiculo/<int:id>")
 def excluir_veiculo(id):
     if "id_usuario" not in session:
         print("Usuario nao logado")
+        return redirect(url_for("index"))
 
-    veiculos = supabase.table("veiculos").delete().eq("id", id).execute()
+    supabase.table("veiculos").delete().eq("id", id).execute()
 
-    return redirect(url_for("listar_clientes", veiculos=veiculos.data))
+    return redirect(url_for("listar_clientes"))
 
 
+# EXCLUSAO DE OS
 @app.route("/excluir_os/<int:id>")
 def excluir_os(id):
     if "id_usuario" not in session:
