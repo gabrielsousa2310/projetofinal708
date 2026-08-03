@@ -248,15 +248,15 @@ def cadastro_veiculos():
 # LISTAGEM DE CLIENTES, FUNCIONARIOS, VEICULOS E REGISTRO DE ORDEM DE SERVIÇO
 
 
-@app.route("/listar_clientes")
-def listar_clientes():
+@app.route("/listar_clientes_ativos")
+def listar_clientes_ativos():
     if "id_usuario" not in session:
         print("Usuario nao logado")
         return redirect(url_for("index"))
 
     clientes = supabase.table("clientes").select("*").eq("ativo", True).execute()
 
-    return render_template("clientes/listar_clientes.html", clientes=clientes.data)
+    return render_template("clientes/listar_clientes_ativos.html", clientes=clientes.data)
 
 
 @app.route("/listar_clientes_inativos")

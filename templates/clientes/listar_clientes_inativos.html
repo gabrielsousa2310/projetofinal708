@@ -8,11 +8,11 @@
     <div class="mb-5">
 
         <h1 class="fw-bold">
-            Clientes Cadastrados
+            Clientes Inativos
         </h1>
 
         <p class="text-muted mb-0">
-            Visualize todos os clientes registrados no sistema.
+            Visualize todos os clientes inativos no sistema.
         </p>
 
     </div>
@@ -33,11 +33,11 @@
                 <div>
 
                     <h4 class="fw-bold mb-0">
-                        Lista de Clientes
+                        Lista de Clientes Inativos
                     </h4>
 
                     <small class="text-muted">
-                        Total de clientes cadastrados: {{ clientes|length }}
+                        Total de clientes inativos: {{ clientes|length }}
                     </small>
 
 
@@ -81,9 +81,7 @@
                                     class="btn btn-sm btn-warning">
                                     <i class="bi bi-pencil-fill">editar</i>
                                 </a>
-                                <!-- <a href="{{ url_for('excluir_cliente', id=cliente.id) }}" class="btn btn-sm btn-danger">
-                                    <i class="bi bi-trash-fill">excluir</i>
-                                </a> -->
+                                
                                 <button type="button" class="btn btn-danger bnt-sm" data-bs-toggle="modal"
                                     data-bs-target="#modal{{ cliente.id }}">
                                     ativar
