@@ -8,17 +8,15 @@ from dotenv import load_dotenv
 import os
 from supabase import create_client
 
-# senha da sessão: 12345
 
+        
 
-load_dotenv()
-supabase_url = os.getenv("SUPABASE_URL")
-supabase_key = os.getenv("SUPABASE_KEY")
-supabase = create_client(supabase_url, supabase_key)
+load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env"))
+
+supabase = create_client(os.getenv("SUPABASE_URL"), os.getenv("SUPABASE_KEY"))
 
 app = Flask(__name__)
-app.secret_key = "12345"
-
+app.secret_key = os.getenv("SECRET_KEY")
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -58,7 +56,7 @@ def dashboard():
     total_clientes = len(clientes.data) if clientes.data else 0
     total_registro_os = len(registro_os.data) if registro_os.data else 0
     total_funcionarios = len(funcionarios.data) if funcionarios.data else 0
-
+    
     relatorio = (
         supabase.table("registro_os")
         .select("*, clientes(nome), funcionarios(nome), veiculos(placa, marca, modelo)")
@@ -191,16 +189,8 @@ def registro_os():
     clientes = supabase.table("clientes").select("*").execute()
     funcionarios = supabase.table("funcionarios").select("*").execute()
     veiculos = supabase.table("veiculos").select("*").execute()
-    registro_os = (
-        supabase.table("registro_os")
-        .select("*,clientes(nome),veiculos(marca,modelo,placa)")
-        .execute()
-    )
-    os = (
-        supabase.table("registro_os")
-        .select("*, clientes(nome), funcionarios(nome), veiculos(placa)")
-        .execute()
-    )
+    registro_os = (supabase.table("registro_os").select("*,clientes(nome),veiculos(marca,modelo,placa)").execute())
+    os = (supabase.table("registro_os").select("*, clientes(nome), funcionarios(nome), veiculos(placa)").execute())
 
     return render_template(
         "os/registro_os.html",
@@ -287,23 +277,33 @@ def listar_os():
     return render_template("os/listar_os.html", os_service=os_service.data)
 
 
-@app.route("/listar_funcionarios")
-def listar_funcionarios():
+@app.route("/listar_funcionarios_ativos")
+def listar_funcionarios_ativos():
     if "id_usuario" not in session:
         print("Usuario nao logado")
         return redirect(url_for("index"))
 
-    funcionarios = supabase.table("funcionarios").select("*").execute()
+    funcionarios = supabase.table("funcionarios").select("*").eq("ativo", True).execute()
+    
+    return render_template("funcionarios/listar_funcionarios_ativos.html", funcionarios=funcionarios.data)
 
-    return render_template(
-        "funcionarios/listar_funcionarios.html", funcionarios=funcionarios.data
-    )
+@app.route("/listar_funcionarios_inativos")
+def listar_funcionarios_inativos():
+    if "id_usuario" not in session:
+        print("usuario nao logado")
+        return redirect(url_for("index"))
+
+    funcionarios = supabase.table("funcionarios").select("*").eq("ativo", False).execute()
+
+    return render_template("funcionarios/listar_funcionarios_inativos.html", funcionarios=funcionarios.data)
+
 
 
 # GERENCIAMENTO DO SISTEMA, EXCLUSAO, EDICAO E LOGOUT
 
 
-# EDICAO DE CLIENTES
+# EDICOES
+#BOTAO
 @app.route("/editar_clientes/<int:id>", methods=["GET", "POST"])
 def editar_clientes(id):
     if "id_usuario" not in session:
@@ -335,6 +335,7 @@ def editar_clientes(id):
 
 
 # EDICAO DE OS
+#BOTAO
 @app.route("/editar_os/<int:id>", methods=["GET", "POST"])
 def editar_os(id):
     if "id_usuario" not in session:
@@ -376,7 +377,7 @@ def editar_os(id):
         veiculos=veiculos.data,
     )
 
-
+#BOTAO
 @app.route("/excluir_cliente/<int:id>")
 def excluir_cliente(id):
     if "id_usuario" not in session:
@@ -387,7 +388,7 @@ def excluir_cliente(id):
 
     return redirect(url_for("listar_clientes"))
 
-
+#BOTAO
 @app.route("/inativar_cliente/<int:id>")
 def inativar_cliente(id):
 
@@ -398,7 +399,7 @@ def inativar_cliente(id):
     supabase.table("clientes").update({"ativo": False}).eq("id", id).execute()
 
     return redirect(url_for("listar_clientes"))
-
+#BOTAO
 @app.route("/reativar_cliente/<int:id>")
 def reativar_cliente(id):
     
@@ -409,8 +410,29 @@ def reativar_cliente(id):
     supabase.table("clientes").update({"ativo": True}).eq("id", id).execute()
 
     return redirect(url_for("listar_clientes_inativos"))
+#BOTAO
+@app.route("/inativar_funcionario/<int:id>")
+def inativar_funcionario(id):
+    if "id_usuario" not in session:
+        print("Usuario nao logado")
+        return redirect(url_for("index"))
+    
+    supabase.table("funcionarios").update({"ativo": False}).eq("id", id).execute()
+    
+    return redirect(url_for("listar_funcionarios_ativos"))
+#BOTAO
+@app.route("/reativar_funcionario/<int:id>")
+def reativar_funcionario(id):
+    if "id_usuario" not in session:
+        print("Usuario nao logado")
+        return redirect(url_for("index"))
+    
+    supabase.table("funcionarios").update({"ativo": True}).eq("id", id).execute()
+    
+    return redirect(url_for("listar_funcionarios_inativos"))
 
 # EXCLUSAO DE VEICULO
+#BOTAO
 @app.route("/excluir_veiculo/<int:id>")
 def excluir_veiculo(id):
     if "id_usuario" not in session:
@@ -423,6 +445,7 @@ def excluir_veiculo(id):
 
 
 # EXCLUSAO DE OS
+#BOTAO
 @app.route("/excluir_os/<int:id>")
 def excluir_os(id):
     if "id_usuario" not in session:
@@ -433,7 +456,7 @@ def excluir_os(id):
 
     return redirect(url_for("listar_os"))
 
-
+#BOTAO
 @app.route("/sair")
 def sair():
     session.clear()
