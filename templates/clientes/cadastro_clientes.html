@@ -2,251 +2,169 @@
 
 {% block content %}
 
-<div class="container py-5">
+<div class="container py-4 py-md-5">
 
     <!-- TOPO -->
-    <div class="mb-5">
-
-        <h1 class="fw-bold">
-            Cadastro de Cliente
-        </h1>
-
+    <div class="mb-4 mb-md-5">
+        <h1 class="fw-bold">Cadastro de Cliente</h1>
         <p class="text-muted mb-0">
             Preencha as informações do cliente para realizar o cadastro no sistema.
         </p>
-
     </div>
 
     <!-- CARD -->
     <div class="card border-0 shadow-lg rounded-4">
-
-        <div class="card-body p-4 p-md-5">
+        <div class="card-body p-3 p-md-5">
 
             <form method="POST">
 
                 <!-- DADOS PESSOAIS -->
-                <div class="mb-5">
+                <div class="mb-4 mb-md-5">
 
                     <div class="d-flex align-items-center mb-4">
-
                         <div class="bg-primary rounded-3 p-2 text-white me-3">
-
                             <i class="bi bi-person-fill"></i>
-
                         </div>
-
                         <div>
-
-                            <h4 class="fw-bold mb-0">
-                                Dados pessoais
-                            </h4>
-
-                            <small class="text-muted">
-                                Informações básicas do cliente
-                            </small>
-
+                            <h4 class="fw-bold mb-0">Dados pessoais</h4>
+                            <small class="text-muted">Informações básicas do cliente</small>
                         </div>
-
                     </div>
 
                     <div class="row g-4">
 
                         <!-- NOME -->
-                        <div class="col-md-6">
-
-                            <label class="form-label fw-semibold">
-                                Nome completo
-                            </label>
-
+                        <div class="col-12 col-md-6">
+                            <label for="nome" class="form-label fw-semibold">Nome completo</label>
                             <input
                                 type="text"
+                                id="nome"
                                 name="nome"
                                 class="form-control form-control-lg rounded-3"
-                                placeholder="Digite o nome completo do cliente" maxlength="100"
-                                required
+                                placeholder="Digite o nome completo do cliente"
                                 maxlength="100"
+                                required
                             >
-
                         </div>
 
                         <!-- TELEFONE -->
-                        <div class="col-md-6">
-
-                            <label class="form-label fw-semibold">
-                                Telefone
-                            </label>
-
+                        <div class="col-12 col-md-6">
+                            <label for="telefone" class="form-label fw-semibold">Telefone</label>
                             <input
                                 type="text"
+                                id="telefone"
                                 name="telefone"
                                 class="form-control form-control-lg rounded-3"
-                                placeholder="(xx) xxxxx-xxxx"
+                                placeholder="DDD + número, só números (11 dígitos)"
+                                inputmode="numeric"
                                 maxlength="11"
                                 minlength="11"
                             >
-
                         </div>
 
                         <!-- EMAIL -->
-                        <div class="col-md-6">
-
-                            <label class="form-label fw-semibold">
-                                Email
-                            </label>
-
+                        <div class="col-12 col-md-6">
+                            <label for="email" class="form-label fw-semibold">Email</label>
                             <input
                                 type="email"
+                                id="email"
                                 name="email"
                                 class="form-control form-control-lg rounded-3"
                                 placeholder="Digite o email do cliente"
                                 maxlength="100"
                             >
-
                         </div>
 
                         <!-- CPF -->
-                        <div class="col-md-6">
-
-                            <label class="form-label fw-semibold">
-                                CPF
-                            </label>
-
+                        <div class="col-12 col-md-6">
+                            <label for="cpf" class="form-label fw-semibold">CPF</label>
                             <input
                                 type="text"
+                                id="cpf"
                                 name="cpf"
                                 class="form-control form-control-lg rounded-3"
-                                placeholder="xxx.xxx.xxx-xx"
+                                placeholder="Somente números (11 dígitos)"
+                                inputmode="numeric"
                                 maxlength="11"
                                 minlength="11"
                             >
-
                         </div>
 
                     </div>
-
                 </div>
 
                 <!-- ENDEREÇO -->
-                <div class="mb-5">
+                <div class="mb-4 mb-md-5">
 
                     <div class="d-flex align-items-center mb-4">
-
                         <div class="bg-success rounded-3 p-2 text-white me-3">
-
                             <i class="bi bi-geo-alt-fill"></i>
-
                         </div>
-
                         <div>
-
-                            <h4 class="fw-bold mb-0">
-                                Endereço
-                            </h4>
-
-                            <small class="text-muted">
-                                Informações de localização do cliente
-                            </small>
-
+                            <h4 class="fw-bold mb-0">Endereço</h4>
+                            <small class="text-muted">Informações de localização do cliente</small>
                         </div>
-
                     </div>
 
                     <div class="row g-4">
-
                         <div class="col-12">
-
-                            <label class="form-label fw-semibold">
-                                Endereço completo
-                            </label>
-
+                            <label for="endereco" class="form-label fw-semibold">Endereço completo</label>
                             <input
                                 type="text"
+                                id="endereco"
                                 name="endereco"
                                 class="form-control form-control-lg rounded-3"
                                 placeholder="Digite o endereço completo do cliente"
                                 maxlength="200"
                             >
-
                         </div>
-
                     </div>
-
                 </div>
 
                 <!-- OBSERVAÇÕES -->
-                <div class="mb-5">
+                <div class="mb-4 mb-md-5">
 
                     <div class="d-flex align-items-center mb-4">
-
                         <div class="bg-dark rounded-3 p-2 text-white me-3">
-
                             <i class="bi bi-chat-left-text-fill"></i>
-
                         </div>
-
                         <div>
-
-                            <h4 class="fw-bold mb-0">
-                                Observações
-                            </h4>
-
-                            <small class="text-muted">
-                                Informações adicionais sobre o cliente
-                            </small>
-
+                            <h4 class="fw-bold mb-0">Observações</h4>
+                            <small class="text-muted">Informações adicionais sobre o cliente</small>
                         </div>
-
                     </div>
 
                     <div class="row">
-
                         <div class="col-12">
-
-                            <label class="form-label fw-semibold">
-                                Observações adicionais
-                            </label>
-
+                            <label for="observacoes" class="form-label fw-semibold">Observações adicionais</label>
                             <textarea
+                                id="observacoes"
                                 name="observacoes"
                                 class="form-control rounded-3"
                                 rows="5"
                                 placeholder="Digite observações adicionais sobre o cliente"
                                 maxlength="150"
                             ></textarea>
-
                         </div>
-
                     </div>
-
                 </div>
 
-                <!-- BOTÕES -->
-                <div class="d-flex justify-content-end gap-3 flex-wrap">
-
+                <!-- BOTÕES: largura total no celular, lado a lado no computador -->
+                <div class="d-grid d-sm-flex justify-content-sm-end gap-3">
                     <a href="{{ url_for('dashboard') }}"
-                    class="btn btn-outline-secondary px-4 py-2 rounded-3">
-
+                       class="btn btn-outline-secondary px-4 py-2 rounded-3">
                         Voltar
-
                     </a>
 
-                    <button
-                        type="submit"
-                        class="btn btn-primary px-5 py-2 rounded-3 shadow-sm"
-                    >
-
+                    <button type="submit" class="btn btn-primary px-5 py-2 rounded-3 shadow-sm">
                         <i class="bi bi-check-circle-fill me-2"></i>
-
                         Cadastrar Cliente
-
                     </button>
-
                 </div>
 
             </form>
 
         </div>
-
     </div>
 
 </div>

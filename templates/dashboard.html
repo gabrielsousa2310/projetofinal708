@@ -2,138 +2,82 @@
 
 {% block content %}
 
-
-<body class="bg-light">
-
-    <!-- CONTAINER -->
-    <div class="container mt-5">
+<div class="bg-light min-vh-100">
+    <div class="container py-4 py-md-5">
 
         <!-- TÍTULO -->
-        <div class="text-center mb-5">
-
+        <div class="text-center mb-4 mb-md-5">
             <h1 class="fw-bold">
                 Controle e gerenciamento do sistema
             </h1>
-
             <p class="text-muted">
                 SEJA BEM-VINDO
             </p>
-
         </div>
 
         <!-- CARDS -->
         <div class="row g-4">
 
             <!-- CLIENTES -->
-            <div class="col-md-4">
-
+            <div class="col-12 col-md-4">
                 <div class="card border-0 shadow rounded-4 h-100">
-
                     <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="text-muted mb-0">Clientes</p>
 
-                        <div h class="d-flex justify-content-between align-items-center">
-
-                            <div>
-
-                                <p class="text-muted mb-1 negri">
-                                    Clientes
-                                </p>
-
-                            </div>
-
-                            <div class="bg-primary text-white rounded-4 p-3">
-                                <a href="{{ url_for('listar_clientes_ativos') }}" class="btn  text-white text-decoration-none">
-
-                                    <i class="bi bi-people-fill fs-2">{{ total_clientes }}</i>
-                                </a>
-                            </div>
-
+                            <a href="{{ url_for('listar_clientes_ativos') }}"
+                                class="bg-primary text-white rounded-4 px-3 py-2 text-decoration-none d-flex align-items-center gap-2">
+                                <i class="bi bi-people-fill fs-2"></i>
+                                <span class="fs-2">{{ total_clientes }}</span>
+                            </a>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
 
             <!-- ORDENS -->
-            <div class="col-md-4">
-
+            <div class="col-12 col-md-4">
                 <div class="card border-0 shadow rounded-4 h-100">
-
                     <div class="card-body">
-
                         <div class="d-flex justify-content-between align-items-center">
+                            <p class="text-muted mb-0">Ordens de Serviço</p>
 
-                            <div>
-
-                                <p class="text-muted mb-1">
-                                    Ordens de Serviço
-                                </p>
-
-                            </div>
-
-                            <div class="bg-success text-white rounded-4 p-3">
-
-                                <a href="{{ url_for('listar_os') }}" class="btn  text-white text-decoration-none">
-
-                                    <i class="bi bi-clipboard-check-fill fs-2">{{ total_registro_os }}</i>
-
-                                </a>
-
-                            </div>
-
+                            <a href="{{ url_for('listar_os') }}"
+                                class="bg-success text-white rounded-4 px-3 py-2 text-decoration-none d-flex align-items-center gap-2">
+                                <i class="bi bi-clipboard-check-fill fs-2"></i>
+                                <span class="fs-2">{{ total_registro_os }}</span>
+                            </a>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
 
             <!-- FUNCIONÁRIOS -->
-            <div class="col-md-4">
-
+            <div class="col-12 col-md-4">
                 <div class="card border-0 shadow rounded-4 h-100">
-
                     <div class="card-body">
-
                         <div class="d-flex justify-content-between align-items-center">
+                            <p class="text-muted mb-0">Funcionários</p>
 
-                            <div>
-
-                                <p class="text-muted mb-1">
-                                    Funcionários
-                                </p>
-                            </div>
-
-                            <div class="bg-dark text-white rounded-4 p-3">
-                                <a href="{{ url_for('listar_funcionarios_ativos') }}" class="btn  text-white text-decoration-none">
-
-                                    <i class="bi bi-person-badge-fill fs-2">{{ total_funcionarios }}</i>
-                                </a>
-                            </div>
-
+                            <a href="{{ url_for('listar_funcionarios_ativos') }}"
+                                class="bg-dark text-white rounded-4 px-3 py-2 text-decoration-none d-flex align-items-center gap-2">
+                                <i class="bi bi-person-badge-fill fs-2"></i>
+                                <span class="fs-2">{{ total_funcionarios }}</span>
+                            </a>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
 
         </div>
-        <!-- RELATORIO DE CLIENTES -->
+
+        <!-- RELATÓRIO DE CLIENTES -->
         <div class="mt-5">
+            <h3 class="fw-bold mb-4">Relatório de clientes</h3>
 
-            <h3 class="fw-bold mb-4">
-                Relatório de clientes
-            </h3>
-
-            <div>
-
+            {% if clientes %}
+            <div class="table-responsive">
                 <table class="table">
-                        {% if clientes %}
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
@@ -141,7 +85,6 @@
                             <th scope="col">Telefone</th>
                             <th scope="col">Possui OS</th>
                             <th scope="col">Email</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -151,78 +94,62 @@
                             <td>{{ info.nome }}</td>
                             <td>{{ info.telefone }}</td>
                             <td>{% if info.registro_os %} Sim {% else %} Não {% endif %}</td>
-                            <td>{{ info.email }} </td>
-
+                            <td>{{ info.email }}</td>
                         </tr>
                         {% endfor %}
-                        {% else %}
-                        <div class="alert alert-info rounded-3">
-
-                                <i class="bi bi-info-circle-fill me-2"></i>
-
-                                Nenhuma cliente cadastrado.
-                        </div>
-                        {% endif %}
                     </tbody>
                 </table>
-
             </div>
-
-            <!-- RELATORIO DE OS -->
-            <div class="mt-5">
-
-                <h3 class="fw-bold mb-4">
-                    Relatório de OS
-                </h3>
-
-                <div>
-
-                    <table class="table">
-                            {% if relatorio %}
-                        <thead>
-                            <tr>
-                                <th scope="col">OS</th>
-                                <th scope="col">Cliente</th>
-                                <th scope="col">Funcionário</th>
-                                <th scope="col">Ordens de Serviço</th>
-                                <th scope="col">Veículo</th>
-                                <th scope="col">Placa</th>
-                                <th scope="col">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            {% for ordem in relatorio %}
-                            <tr>
-                                <th scope="row">{{ loop.index }}</th>
-                                <td>{{ ordem.clientes.nome }}</td>
-                                <td>{{ ordem.funcionarios.nome }}</td>
-                                <td>{{ ordem.id }}</td>
-                                <td>{{ ordem.veiculos.marca }} - {{ ordem.veiculos.modelo }}</td>
-                                <td>{{ ordem.veiculos.placa }}</td>
-                                <td>{{ ordem.status }}</td>
-                            </tr>
-                            {% endfor %}
-                            {% else %}
-                            <div class="alert alert-info rounded-3">
-
-                                <i class="bi bi-info-circle-fill me-2"></i>
-
-                                Nenhuma OS cadastrada.
-                            {% endif %}
-
-                            </div>
-                        </tbody>
-                    </table>
-
-                </div>
+            {% else %}
+            <div class="alert alert-info rounded-3">
+                <i class="bi bi-info-circle-fill me-2"></i>
+                Nenhum cliente cadastrado.
             </div>
-
+            {% endif %}
         </div>
 
-        <!-- JS Bootstrap -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- RELATÓRIO DE OS -->
+        <div class="mt-5">
+            <h3 class="fw-bold mb-4">Relatório de OS</h3>
 
+            {% if relatorio %}
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">OS</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Funcionário</th>
+                            <th scope="col">Ordens de Serviço</th>
+                            <th scope="col">Veículo</th>
+                            <th scope="col">Placa</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ordem in relatorio %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <td>{{ ordem.clientes.nome }}</td>
+                            <td>{{ ordem.funcionarios.nome }}</td>
+                            <td>{{ ordem.id }}</td>
+                            <td>{{ ordem.veiculos.marca }} - {{ ordem.veiculos.modelo }}</td>
+                            <td>{{ ordem.veiculos.placa }}</td>
+                            <td>{{ ordem.status }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="alert alert-info rounded-3">
+                <i class="bi bi-info-circle-fill me-2"></i>
+                Nenhuma OS cadastrada.
+            </div>
+            {% endif %}
+        </div>
 
+    </div>
+</div>
 
-        {% endblock %}
+{% endblock %}
