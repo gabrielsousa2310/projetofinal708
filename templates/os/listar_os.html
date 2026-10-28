@@ -78,13 +78,17 @@
                             <td class="fw-semibold text-nowrap"> {{ os.funcionarios.nome }}</td>
 
                             <td>
-                                <a href="{{ url_for('editar_os', id=os.id) }}" class="btn btn-sm btn-warning">
-                                    <i class="bi bi-pencil-fill me-1"></i>editar
-                                </a>
+                                <div class="d-flex align-items-center gap-2">
+                                    <a href="{{ url_for('editar_os', id=os.id) }}"
+                                        class="btn btn-sm btn-warning flex-fill">
+                                        <i class="bi bi-pencil-fill me-1"></i>editar
+                                    </a>
 
-                                <a href="{{ url_for('excluir_os', id=os.id) }}" class="btn btn-sm btn-danger">
-                                    <i class="bi bi-trash-fill me-1"></i>excluir
-                                </a>
+                                    <a href="{{ url_for('excluir_os', id=os.id) }}"
+                                        class="btn btn-sm btn-danger flex-fill">
+                                        <i class="bi bi-trash-fill me-1"></i>excluir
+                                    </a>
+                                </div>
                             </td>
 
                         </tr>
@@ -111,8 +115,7 @@
 
             <div class="mt-4 text-end">
 
-                <a href="{{ url_for('dashboard') }}"
-                   class="btn btn-outline-secondary rounded-3">
+                <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary rounded-3">
 
                     <i class="bi bi-arrow-left me-2"></i>
 
