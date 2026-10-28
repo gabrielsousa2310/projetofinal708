@@ -71,11 +71,11 @@
 
                         <tr>
 
-                            <td class="fw-semibold">{{ os.clientes.id }}</td>
+                            <td class="fw-semibold text-nowrap">{{ os.clientes.id }}</td>
 
-                            <td>{{ os.clientes.nome }}</td>
+                            <td class="fw-semibold text-nowrap">{{ os.clientes.nome }}</td>
 
-                            <td>{{ os.funcionarios.nome }}</td>
+                            <td class="fw-semibold text-nowrap"> {{ os.funcionarios.nome }}</td>
 
                             <td>
                                 <a href="{{ url_for('editar_os', id=os.id) }}" class="btn btn-sm btn-warning">
