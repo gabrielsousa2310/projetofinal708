@@ -1,99 +1,81 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="container-fluid p-0">
+<div class="container-fluid min-vh-100 d-flex flex-column justify-content-center align-items-center px-3 px-sm-4 py-4"
+    style="
+        background-image: linear-gradient(rgba(12, 20, 30, 0.48), rgba(12, 20, 30, 0.88)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9_McTenToQE1-61-XDXafE8mBh3Pru3Uq-997IkRVqA&s=10');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    ">
 
-    <!-- Conteúdo principal -->
-    <div class="row g-0 min-vh-100">
+    <!-- Cabeçalho sobre a imagem -->
+    <div class="text-center text-white mb-4 mb-sm-5 w-100">
 
-        <!-- Lado esquerdo -->
-        <div class="col-12 col-lg-7 d-flex flex-column justify-content-center bg-dark text-white p-3 p-sm-4 p-lg-5">
+        <h1 class="fs-3 fw-bold mb-2">
+            G-Auto Soluções Automotivas
+        </h1>
 
-            <h1 class="fs-2 fw-bold mb-2 mb-lg-4 text-center text-lg-start">
-                SuperOS
-            </h1>
+        <p class="fs-6 mb-0 px-2">
+            Gestão completa para oficinas mecânicas.
+        </p>
 
-            <p class="fs-6 mb-3 mb-lg-4 text-center text-lg-start">
-                Gestão completa para oficinas mecânicas.
-            </p>
+    </div>
 
-            <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9_McTenToQE1-61-XDXafE8mBh3Pru3Uq-997IkRVqA&s=10"
-                class="img-fluid rounded shadow-lg w-100"
-                alt="Oficina mecânica"
-                loading="lazy"
-            >
+    <!-- Área de login centralizada -->
+    <div class="w-100 px-2 px-sm-3" style="max-width: 620px;">
 
-        </div>
+        <div class="card bg-white border-0 shadow-lg rounded-4">
 
-        <!-- Lado direito -->
-        <div class="col-12 col-lg-5 d-flex align-items-center justify-content-center p-3 p-sm-4 p-lg-5">
+            <div class="card-body p-3 p-sm-4 p-md-5">
 
-            <div class="w-100">
+                <!-- Boas-vindas -->
+                <div class="text-center mb-4">
 
-                <div class="text-center mb-3 mb-lg-4">
+                    <i class="bi bi-person-circle text-primary fs-1"></i>
 
-                    <i class="bi bi-person-circle text-primary display-4"></i>
-
-                    <h3 class="fs-4 fw-bold mt-2 mt-lg-3">
+                    <h2 class="fs-4 fw-bold mt-2 mb-2 text-dark">
                         Bem-vindo
-                    </h3>
+                    </h2>
 
-                    <p class="text-muted small mb-0">
+                    <p class="text-secondary small mb-0">
                         Faça login para acessar o sistema
                     </p>
 
                 </div>
 
-                <div class="card shadow border-0 rounded-4 p-3 p-sm-4">
+                <!-- Formulário -->
+                <form action="/" method="POST">
 
-                    <form action="/" method="POST">
+                    <div class="mb-3">
 
-                        <div class="mb-3">
+                        <label for="email" class="form-label fw-semibold small">
+                            E-mail
+                        </label>
 
-                            <label for="email" class="form-label fw-semibold">
-                                E-mail
-                            </label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail"
+                            autocomplete="email" inputmode="email" required>
 
-                            <input
-                                type="email"
-                                class="form-control form-control-lg"
-                                id="email"
-                                name="email"
-                                placeholder="Digite seu e-mail"
-                                autocomplete="email"
-                                inputmode="email"
-                                required
-                            >
+                    </div>
 
-                        </div>
+                    <div class="mb-4">
 
-                        <div class="mb-4">
+                        <label for="senha" class="form-label fw-semibold small">
+                            Senha
+                        </label>
 
-                            <label for="senha" class="form-label fw-semibold">
-                                Senha
-                            </label>
+                        <input type="password" class="form-control" id="senha" name="senha"
+                            placeholder="Digite sua senha" autocomplete="current-password" required>
 
-                            <input
-                                type="password"
-                                class="form-control form-control-lg"
-                                id="senha"
-                                name="senha"
-                                placeholder="Digite sua senha"
-                                autocomplete="current-password"
-                                required
-                            >
+                    </div>
 
-                        </div>
+                    <button type="submit" class="btn btn-primary w-100 py-2">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>
+                        Entrar
+                    </button>
 
-                        <button type="submit" class="btn btn-primary btn-lg w-100">
-                            <i class="bi bi-box-arrow-in-right me-2"></i>
-                            Entrar
-                        </button>
-
-                    </form>
-
-                </div>
+                </form>
 
             </div>
 
@@ -101,56 +83,58 @@
 
     </div>
 
-    <!-- Rodapé -->
-    <footer class="bg-dark text-white py-4 px-3">
+</div>
 
-        <div class="container">
+<!-- Rodapé -->
+<footer class="bg-dark text-white py-4 px-3">
 
-            <div class="row text-center g-3">
+    <div class="container">
 
-                <div class="col-12 col-md-4">
+        <div class="row text-center g-3">
 
-                    <h5 class="fs-6 fw-bold">SuperOS</h5>
+            <div class="col-12 col-md-4">
 
-                    <p class="small mb-0">
-                        Sistema para Oficinas Mecânicas
-                    </p>
+                <h5 class="fs-6 fw-bold">G-Auto Soluções Automotivas</h5>
 
-                </div>
-
-                <div class="col-12 col-md-4">
-
-                    <h5 class="fs-6 fw-bold">Contato</h5>
-
-                    <p class="small mb-0">
-                        +55 (85) 99126-9158
-                        <br>
-                        contato@superos.com
-                    </p>
-
-                </div>
-
-                <div class="col-12 col-md-4">
-
-                    <h5 class="fs-6 fw-bold">Endereço</h5>
-
-                    <p class="small mb-0">
-                        Av. Principal, 6864, Bairro Centro, Fortaleza - CE
-                    </p>
-
-                </div>
+                <p class="small mb-0">
+                    Sistema para Oficinas Mecânicas
+                </p>
 
             </div>
 
-            <hr class="border-light">
+            <div class="col-12 col-md-4">
 
-            <div class="text-center small">
-                © 2026 SuperOS - Todos os direitos reservados.
+                <h5 class="fs-6 fw-bold">Contato</h5>
+
+                <p class="small mb-0">
+                    +55 (85) 99126-9158
+                    <br>
+                    contato@g-auto.com
+                </p>
+
+            </div>
+
+            <div class="col-12 col-md-4">
+
+                <h5 class="fs-6 fw-bold">Endereço</h5>
+
+                <p class="small mb-0">
+                    Av. Principal, 6864, Bairro Centro, Fortaleza - CE
+                </p>
+
             </div>
 
         </div>
 
-    </footer>
+        <hr class="border-light">
+
+        <div class="text-center small">
+            © 2026 G-Auto Soluções Automotivas - Todos os direitos reservados.
+        </div>
+
+    </div>
+
+</footer>
 
 </div>
 
