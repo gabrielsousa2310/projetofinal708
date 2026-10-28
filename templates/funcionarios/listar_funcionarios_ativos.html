@@ -1,3 +1,4 @@
+
 {% extends "baselogado.html" %}
 
 {% block content %}
@@ -33,14 +34,12 @@
                 <div>
 
                     <h4 class="fw-bold mb-0">
-                        Lista de funcionarios ativos 
+                        Lista de funcionarios ativos
                     </h4>
 
                     <small class="text-muted">
                         Total de funcionarios ativos: {{ funcionarios|length }}
                     </small>
-
-
 
                 </div>
 
@@ -73,27 +72,35 @@
 
                             <td class="fw-semibold text-nowrap">{{ funcionario.nome }}</td>
 
-                            <td>{{ funcionario.email }}</td>
+                            <td class="fw-semibold text-nowrap">{{ funcionario.email }}</td>
 
-                            <td>{{ funcionario.telefone }}</td>
+                            <td class="fw-semibold text-nowrap">{{ funcionario.telefone }}</td>
+
                             <td>
-                                <a href="{{ url_for('listar_clientes_ativos', id=funcionario.id) }}"
-                                    class="btn btn-sm btn-warning">
-                                    <i class="bi bi-pencil-fill">editar</i>
-                                </a>
-                                
-                                <button type="button" class="btn btn-danger bnt-sm" data-bs-toggle="modal"
-                                    data-bs-target="#modal{{ funcionario.id }}">
-                                    inativar
-                                </button>
-                                <div class="modal fade" id="modal{{ funcionario .id }}" tabindex="-1">
+                                <div class="d-flex align-items-center gap-2">
+
+                                    <a href="{{ url_for('listar_clientes_ativos', id=funcionario.id) }}"
+                                       class="btn btn-sm btn-warning flex-fill">
+                                        <i class="bi bi-pencil-fill me-1"></i>editar
+                                    </a>
+
+                                    <button type="button"
+                                            class="btn btn-sm btn-danger flex-fill"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modal{{ funcionario.id }}">
+                                        inativar
+                                    </button>
+
+                                </div>
+
+                                <div class="modal fade" id="modal{{ funcionario.id }}" tabindex="-1">
 
                                     <div class="modal-dialog">
 
                                         <div class="modal-content">
 
                                             <div class="modal-header">
-                                                <h5 class="modal-title " > Atenção !</h5>
+                                                <h5 class="modal-title">Atenção!</h5>
 
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal">
                                                 </button>
@@ -111,7 +118,6 @@
                                                 <br><br>
 
                                                 Deseja continuar?
-
                                             </div>
 
                                             <div class="modal-footer">
@@ -121,9 +127,8 @@
                                                 </button>
 
                                                 <a href="{{ url_for('inativar_funcionario', id=funcionario.id) }}"
-                                                    class="btn btn-danger">
-                                                    inativar
-                                                    </i>
+                                                   class="btn btn-danger">
+                                                    Inativar
                                                 </a>
 
                                             </div>
@@ -136,7 +141,6 @@
                             </td>
 
                         </tr>
-
 
                         {% endfor %}
 
@@ -152,7 +156,7 @@
 
                 <i class="bi bi-info-circle-fill me-2"></i>
 
-                Nenhum funcionario cadastrado.
+                Nenhum cliente cadastrado.
 
             </div>
 
