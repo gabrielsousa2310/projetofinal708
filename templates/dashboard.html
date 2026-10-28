@@ -1,3 +1,4 @@
+
 {% extends "baselogado.html" %}
 
 {% block content %}
@@ -91,7 +92,7 @@
                         {% for info in clientes %}
                         <tr>
                             <th scope="row">{{ loop.index }}</th>
-                            <td>{{ info.nome }}</td>
+                            <td class="text-nowrap">{{ info.nome }}</td>
                             <td>{{ info.telefone }}</td>
                             <td>{% if info.registro_os %} Sim {% else %} Não {% endif %}</td>
                             <td>{{ info.email }}</td>
@@ -130,8 +131,8 @@
                         {% for ordem in relatorio %}
                         <tr>
                             <th scope="row">{{ loop.index }}</th>
-                            <td>{{ ordem.clientes.nome }}</td>
-                            <td>{{ ordem.funcionarios.nome }}</td>
+                            <td class="text-nowrap">{{ ordem.clientes.nome }}</td>
+                            <td class="text-nowrap">{{ ordem.funcionarios.nome }}</td>
                             <td>{{ ordem.id }}</td>
                             <td>{{ ordem.veiculos.marca }} - {{ ordem.veiculos.modelo }}</td>
                             <td>{{ ordem.veiculos.placa }}</td>
