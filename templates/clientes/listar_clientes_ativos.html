@@ -45,7 +45,7 @@
                     <tbody>
                         {% for cliente in clientes %}
                         <tr>
-                            <td class="fw-semibold">{{ cliente.nome }}</td>
+                            <td class="fw-semibold text-nowrap">{{ cliente.nome }}</td>
                             <td class="d-none d-md-table-cell">{{ cliente.email or '-' }}</td>
                             <td>{{ cliente.telefone or '-' }}</td>
                             <td class="text-nowrap">
