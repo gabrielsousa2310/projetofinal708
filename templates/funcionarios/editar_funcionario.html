@@ -1,0 +1,83 @@
+{% extends "baselogado.html" %}
+{% block content %}
+<div class="container py-4 py-md-5">
+    <div class="mb-4">
+        <h1 class="fw-bold">Editar funcionário</h1>
+        <p class="text-muted mb-0">Atualize os dados do funcionário cadastrado.</p>
+    </div>
+    <div class="card border-0 shadow-lg rounded-4">
+        <div class="card-body p-3 p-md-5">
+            <form method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="row g-3">
+                    <div class="col-12 col-md-6">
+                        <label for="nome" class="form-label">Nome completo</label>
+                        <input id="nome" name="nome" class="form-control" maxlength="100" value="{{ funcionario.nome or '' }}" required>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="cpf" class="form-label">CPF</label>
+                        <input id="cpf" name="cpf" class="form-control" maxlength="14" value="{{ funcionario.cpf or '' }}">
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="telefone" class="form-label">Telefone</label>
+                        <input id="telefone" name="telefone" class="form-control" maxlength="20" value="{{ funcionario.telefone or '' }}">
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="email" class="form-label">E-mail</label>
+                        <input id="email" name="email" type="email" class="form-control" maxlength="100" value="{{ funcionario.email or '' }}">
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <label for="endereco" class="form-label">Endereço</label>
+                        <input id="endereco" name="endereco" class="form-control" maxlength="200" value="{{ funcionario.endereco or '' }}">
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <label for="numero" class="form-label">Número</label>
+                        <input id="numero" name="numero" class="form-control" maxlength="20" value="{{ funcionario.numero or '' }}">
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <label for="complemento" class="form-label">Complemento</label>
+                        <input id="complemento" name="complemento" class="form-control" maxlength="80" value="{{ funcionario.complemento or '' }}">
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="cargo" class="form-label">Cargo</label>
+                        <input id="cargo" name="cargo" class="form-control" maxlength="80" value="{{ funcionario.cargo or '' }}">
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="especialidade" class="form-label">Especialidade</label>
+                        <select id="especialidade" name="especialidade" class="form-select">
+                            <option value="">Selecione</option>
+                            {% for especialidade in ['Mecânica Geral', 'Motor', 'Freios', 'Suspensão', 'Elétrica Automotiva', 'Injeção Eletrônica', 'Ar Condicionado'] %}
+                                <option value="{{ especialidade }}" {% if funcionario.especialidade == especialidade %}selected{% endif %}>{{ especialidade }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="salario" class="form-label">Salário</label>
+                        <input id="salario" name="salario" type="number" step="0.01" min="0" class="form-control" value="{{ funcionario.salario if funcionario.salario is not none else '' }}">
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="data_admissao" class="form-label">Data de admissão</label>
+                        <input id="data_admissao" name="data_admissao" type="date" class="form-control" value="{{ funcionario.data_admissao or '' }}">
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="possui_cnh" class="form-label">Possui CNH?</label>
+                        <div class="form-check mt-2">
+                            <input id="possui_cnh" name="possui_cnh" type="checkbox" class="form-check-input" value="on"
+                                   {% if funcionario.possui_cnh %}checked{% endif %}>
+                            <label for="possui_cnh" class="form-check-label">Possui CNH</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="observacoes" class="form-label">Observações</label>
+                        <textarea id="observacoes" name="observacoes" class="form-control" rows="4" maxlength="500">{{ funcionario.observacoes or '' }}</textarea>
+                    </div>
+                </div>
+                <div class="d-grid d-sm-flex justify-content-sm-end gap-2 mt-4">
+                    <a href="{{ url_for('listar_funcionarios_ativos') }}" class="btn btn-outline-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-success"><i class="bi bi-save me-2"></i>Salvar alterações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

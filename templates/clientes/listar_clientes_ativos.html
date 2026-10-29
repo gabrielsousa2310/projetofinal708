@@ -92,10 +92,10 @@
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                 Cancelar
                             </button>
-                            <a href="{{ url_for('inativar_cliente', id=cliente.id) }}"
-                                class="btn btn-danger">
-                                inativar
-                            </a>
+                            <form action="{{ url_for('inativar_cliente', id=cliente.id) }}" method="POST" class="m-0">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <button type="submit" class="btn btn-danger">Inativar</button>
+                            </form>
                         </div>
 
                     </div>

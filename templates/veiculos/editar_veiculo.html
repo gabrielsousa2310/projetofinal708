@@ -1,0 +1,61 @@
+{% extends "baselogado.html" %}
+
+{% block content %}
+<div class="container py-4 py-md-5">
+    <div class="mb-4">
+        <h1 class="fw-bold">Editar veículo</h1>
+        <p class="text-muted mb-0">Atualize os dados do veículo cadastrado.</p>
+    </div>
+
+    <div class="card border-0 shadow rounded-4">
+        <div class="card-body p-3 p-md-5">
+            <form method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <h5 class="fw-semibold mb-4"><i class="bi bi-car-front me-2"></i>Informações do veículo</h5>
+                <div class="row g-3 g-md-4">
+                    <div class="col-12 col-md-6">
+                        <label for="cliente_id" class="form-label">Cliente responsável</label>
+                        <select name="cliente_id" id="cliente_id" class="form-select form-select-lg" required>
+                            <option value="">Selecione o cliente</option>
+                            {% for cliente in clientes %}
+                            <option value="{{ cliente.id }}" {% if cliente.id|string == veiculo.cliente_id|string %}selected{% endif %}>{{ cliente.nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="marca" class="form-label">Marca</label>
+                        <input id="marca" type="text" name="marca" class="form-control form-control-lg" maxlength="50" value="{{ veiculo.marca or '' }}" required>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="modelo" class="form-label">Modelo</label>
+                        <input id="modelo" type="text" name="modelo" class="form-control form-control-lg" maxlength="50" value="{{ veiculo.modelo or '' }}" required>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="ano" class="form-label">Ano</label>
+                        <input id="ano" type="number" name="ano" class="form-control form-control-lg" min="1900" max="2100" value="{{ veiculo.ano or '' }}">
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="placa" class="form-label">Placa</label>
+                        <input id="placa" type="text" name="placa" class="form-control form-control-lg text-uppercase" maxlength="7" value="{{ veiculo.placa or '' }}" required>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="cor" class="form-label">Cor</label>
+                        <input id="cor" type="text" name="cor" class="form-control form-control-lg" maxlength="25" value="{{ veiculo.cor or '' }}">
+                    </div>
+                    <div class="col-12">
+                        <label for="observacoes" class="form-label">Observações</label>
+                        <textarea id="observacoes" name="observacoes" class="form-control" rows="4" maxlength="150">{{ veiculo.observacoes or '' }}</textarea>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+                <div class="d-flex flex-column flex-sm-row justify-content-between gap-2">
+                    <a href="{{ url_for('listar_veiculos') }}" class="btn btn-outline-secondary px-4">Cancelar</a>
+                    <button type="submit" class="btn btn-primary px-4"><i class="bi bi-check-circle me-2"></i>Salvar alterações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

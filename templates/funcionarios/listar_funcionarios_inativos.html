@@ -77,15 +77,16 @@
 
                             <td>{{ funcionario.telefone }}</td>
                             <td>
-                                <a href=""
-                                    class="btn btn-sm btn-warning">
-                                    <i class="bi bi-pencil-fill">editar</i>
-                                </a>
-                                
-                                <button type="button" class="btn btn-danger bnt-sm" data-bs-toggle="modal"
-                                    data-bs-target="#modal{{ funcionario.id }}">
-                                    ativar
-                                </button>
+                                <div class="d-flex align-items-center gap-2">
+                                    <a href="{{ url_for('editar_funcionario', id=funcionario.id) }}"
+                                       class="btn btn-sm btn-warning flex-fill text-nowrap">
+                                        <i class="bi bi-pencil-fill me-1"></i>editar
+                                    </a>
+                                    <button type="button" class="btn btn-sm btn-danger flex-fill text-nowrap"
+                                            data-bs-toggle="modal" data-bs-target="#modal{{ funcionario.id }}">
+                                        ativar
+                                    </button>
+                                </div>
                                 <div class="modal fade" id="modal{{ funcionario.id }}" tabindex="-1">
 
                                     <div class="modal-dialog">
@@ -115,11 +116,10 @@
                                                     Cancelar
                                                 </button>
 
-                                                <a href="{{ url_for('reativar_funcionario', id=funcionario.id) }}"
-                                                    class="btn btn-danger">
-                                                    reativar
-                                                    </i>
-                                                </a>
+                                                <form action="{{ url_for('reativar_funcionario', id=funcionario.id) }}" method="POST" class="m-0">
+                                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                                    <button type="submit" class="btn btn-success">Reativar</button>
+                                                </form>
 
                                             </div>
 

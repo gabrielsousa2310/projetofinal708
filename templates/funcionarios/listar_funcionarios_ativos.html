@@ -77,7 +77,7 @@
 
                             <td>
                                 <div class="d-flex align-items-center gap-2">
-                                    <a href="{{ url_for('listar_clientes_ativos', id=funcionario.id) }}"
+                                    <a href="{{ url_for('editar_funcionario', id=funcionario.id) }}"
                                         class="btn btn-sm btn-warning flex-fill text-nowrap">
                                         <i class="bi bi-pencil-fill me-1"></i>editar
                                     </a>
@@ -121,10 +121,10 @@
                                                     Cancelar
                                                 </button>
 
-                                                <a href="{{ url_for('inativar_funcionario', id=funcionario.id) }}"
-                                                    class="btn btn-danger">
-                                                    Inativar
-                                                </a>
+                                                <form action="{{ url_for('inativar_funcionario', id=funcionario.id) }}" method="POST" class="m-0">
+                                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                                    <button type="submit" class="btn btn-danger">Inativar</button>
+                                                </form>
 
                                             </div>
 

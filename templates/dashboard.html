@@ -20,7 +20,7 @@
         <div class="row g-4">
 
             <!-- CLIENTES -->
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-6 col-xl-3">
                 <div class="card border-0 shadow rounded-4 h-100">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
@@ -37,7 +37,7 @@
             </div>
 
             <!-- ORDENS -->
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-6 col-xl-3">
                 <div class="card border-0 shadow rounded-4 h-100">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
@@ -54,7 +54,7 @@
             </div>
 
             <!-- FUNCIONÁRIOS -->
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-6 col-xl-3">
                 <div class="card border-0 shadow rounded-4 h-100">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
@@ -64,6 +64,22 @@
                                 class="bg-dark text-white rounded-4 px-3 py-2 text-decoration-none d-flex align-items-center gap-2">
                                 <i class="bi bi-person-badge-fill fs-2"></i>
                                 <span class="fs-2">{{ total_funcionarios }}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VEÍCULOS -->
+            <div class="col-12 col-md-6 col-xl-3">
+                <div class="card border-0 shadow rounded-4 h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center gap-2">
+                            <p class="text-muted mb-0">Veículos</p>
+                            <a href="{{ url_for('listar_veiculos') }}"
+                                class="bg-warning text-dark rounded-4 px-3 py-2 text-decoration-none d-flex align-items-center gap-2">
+                                <i class="bi bi-car-front-fill fs-2"></i>
+                                <span class="fs-2">{{ total_veiculos }}</span>
                             </a>
                         </div>
                     </div>

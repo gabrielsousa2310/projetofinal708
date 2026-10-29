@@ -82,7 +82,7 @@
                                     <i class="bi bi-pencil-fill">editar</i>
                                 </a>
                                 
-                                <button type="button" class="btn btn-danger bnt-sm" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#modal{{ cliente.id }}">
                                     ativar
                                 </button>
@@ -115,11 +115,10 @@
                                                     Cancelar
                                                 </button>
 
-                                                <a href="{{ url_for('reativar_cliente', id=cliente.id) }}"
-                                                    class="btn btn-danger">
-                                                    reativar
-                                                    </i>
-                                                </a>
+                                                <form action="{{ url_for('reativar_cliente', id=cliente.id) }}" method="POST" class="m-0">
+                                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                                    <button type="submit" class="btn btn-success">Reativar</button>
+                                                </form>
 
                                             </div>
 

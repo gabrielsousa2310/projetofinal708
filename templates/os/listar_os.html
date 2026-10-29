@@ -71,7 +71,7 @@
 
                         <tr>
 
-                            <td class="fw-semibold text-nowrap">{{ os.clientes.id }}</td>
+                            <td class="fw-semibold text-nowrap">{{ os.id }}</td>
 
                             <td class="fw-semibold text-nowrap">{{ os.clientes.nome }}</td>
 
@@ -84,10 +84,13 @@
                                         <i class="bi bi-pencil-fill me-1"></i>editar
                                     </a>
 
-                                    <a href="{{ url_for('excluir_os', id=os.id) }}"
-                                        class="btn btn-sm btn-danger flex-fill">
-                                        <i class="bi bi-trash-fill me-1"></i>excluir
-                                    </a>
+                                    <form action="{{ url_for('excluir_os', id=os.id) }}" method="POST" class="flex-fill m-0"
+                                          onsubmit="return confirm('Tem certeza que deseja excluir esta ordem de serviço?');">
+                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                        <button type="submit" class="btn btn-sm btn-danger w-100">
+                                            <i class="bi bi-trash-fill me-1"></i>excluir
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
 

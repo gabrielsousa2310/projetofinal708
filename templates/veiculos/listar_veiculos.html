@@ -1,0 +1,82 @@
+{% extends "baselogado.html" %}
+
+{% block content %}
+<div class="container py-4 py-md-5">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+        <div>
+            <h1 class="fw-bold mb-1">Veículos cadastrados</h1>
+            <p class="text-muted mb-0">Consulte e gerencie os veículos dos clientes.</p>
+        </div>
+        <a href="{{ url_for('cadastro_veiculos') }}" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-2"></i>Cadastrar veículo
+        </a>
+    </div>
+
+    <div class="card border-0 shadow rounded-4">
+        <div class="card-body p-3 p-md-4">
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <div class="bg-primary rounded-3 p-2 text-white"><i class="bi bi-car-front-fill"></i></div>
+                <div>
+                    <h4 class="fw-bold mb-0">Lista de veículos</h4>
+                    <small class="text-muted">Total cadastrado: {{ veiculos|length }}</small>
+                </div>
+            </div>
+
+            {% if veiculos %}
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Veículo</th>
+                            <th>Placa</th>
+                            <th>Ano</th>
+                            <th>Cor</th>
+                            <th>Cliente</th>
+                            <th class="text-end">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for veiculo in veiculos %}
+                        <tr>
+                            <td class="fw-semibold text-nowrap">{{ veiculo.marca or '' }} {{ veiculo.modelo or '' }}</td>
+                            <td class="text-nowrap"><span class="badge text-bg-light border text-dark">{{ veiculo.placa or '-' }}</span></td>
+                            <td>{{ veiculo.ano or '-' }}</td>
+                            <td>{{ veiculo.cor or '-' }}</td>
+                            <td>{{ veiculo.cliente_nome }}</td>
+                            <td>
+                                <div class="d-flex justify-content-end gap-2 flex-nowrap">
+                                    <a href="{{ url_for('editar_veiculo', id=veiculo.id) }}" class="btn btn-sm btn-warning text-nowrap">
+                                        <i class="bi bi-pencil-fill me-1"></i>Editar
+                                    </a>
+                                    <form action="{{ url_for('excluir_veiculo', id=veiculo.id) }}" method="POST" class="m-0"
+                                          onsubmit="return confirm('Tem certeza de que deseja excluir este veículo? Se estiver vinculado a uma ordem de serviço, a exclusão poderá ser bloqueada.');">
+                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                        <button type="submit" class="btn btn-sm btn-danger text-nowrap">
+                                            <i class="bi bi-trash-fill me-1"></i>Excluir
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="text-center py-5">
+                <i class="bi bi-car-front display-4 text-muted"></i>
+                <h5 class="mt-3">Nenhum veículo cadastrado</h5>
+                <p class="text-muted">Cadastre o primeiro veículo para começar a gerenciar os registros.</p>
+                <a href="{{ url_for('cadastro_veiculos') }}" class="btn btn-primary">Cadastrar veículo</a>
+            </div>
+            {% endif %}
+
+            <div class="mt-4 text-end">
+                <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left me-2"></i>Voltar ao Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
